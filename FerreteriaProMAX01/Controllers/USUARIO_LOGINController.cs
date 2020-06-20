@@ -152,7 +152,7 @@ namespace FerreteriaProMAX01.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
+
             USUARIO_LOGIN uSUARIO_LOGIN = db.USUARIO_LOGIN.Find(m.USUARIO_LOGINL(usuario,contraseña));
             var result = false;
             if (uSUARIO_LOGIN == null)

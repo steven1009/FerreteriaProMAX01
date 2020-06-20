@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using FerreteriaProMAX01.Metodos;
 using FerreteriaProMAX01.Models;
+using Microsoft.Ajax.Utilities;
 
 namespace FerreteriaProMAX01.Controllers
 {
     public class USUARIO_LOGINController : Controller
     {
         private FerreteriaDBEntities db = new FerreteriaDBEntities();
+        Metodos.Metodos m = new Metodos.Metodos();
 
         // GET: USUARIO_LOGIN
         public ActionResult Index()
@@ -118,6 +122,57 @@ namespace FerreteriaProMAX01.Controllers
             db.USUARIO_LOGIN.Remove(uSUARIO_LOGIN);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+        [AllowAnonymous]
+        public ActionResult Login()
+        {
+            if (Session["id"] == null)
+            {
+                Session["id"] = "0";
+                return View();
+            }
+            else if (!Session["id"].ToString().Equals("0"))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        //
+        // POST: /Account/Login
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(String usuario, String contraseña)
+        {
+            if (usuario.IsNullOrWhiteSpace() | contraseña.IsNullOrWhiteSpace())
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            
+            USUARIO_LOGIN uSUARIO_LOGIN = db.USUARIO_LOGIN.Find(m.USUARIO_LOGINL(usuario,contraseña));
+            var result = false;
+            if (uSUARIO_LOGIN == null)
+            {
+                return HttpNotFound();
+            }
+            Session["id"] = uSUARIO_LOGIN.IdUsuario;
+            result = true;
+            switch (result)
+            {
+                case true:
+                    return RedirectToAction("Index", "Home");
+                case false:
+                    return View("Login", "USUARIO_LOGIN");
+                default:
+                    return View();
+            }
+
+
+
         }
 
         protected override void Dispose(bool disposing)

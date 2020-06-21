@@ -115,11 +115,7 @@
         $("#txtnombre").val("");
         $("#idCliente").val("");
         $("#codigoCliente").val("");
-    } function limpiarClientes() {
-        //document.getElementById("txtnombre").value("");
-        //document.getElementById("idClientee").value = "";
-        //document.getElementById("codigoCliente").value = "";    
-    }
+    } 
     function limpiarDetalle() {
         $("#detalle tbody tr").val("");
     }
@@ -268,7 +264,7 @@
             $.ajax({
                 type: "POST",
                 url: "Seleccionar",
-                data: { idProducto: $("#ListaProducto").val() },
+                data: { idProducto: $("#idProducto").val() },
                 success: function (mensaje) {
                     //alert(mensaje);
                     //$("#idproducto").val(mensaje.Nombre);

@@ -1,4 +1,6 @@
 ﻿using FerreteriaProMAX01.Models;
+using Microsoft.Ajax.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -205,7 +207,7 @@ namespace FerreteriaProMAX01.Controllers
         }
 
         [HttpPost]//para buscar clientes
-        public ActionResult ObtenerClientes(string txtnombre, string txtappaterno, string txtdni, int txtcliente = -1)
+        public ActionResult ObtenerClientes(string txtnombre, string txtappaterno, string txtdni, string txtcliente)
         {
             if (txtnombre == "")
             {
@@ -219,17 +221,40 @@ namespace FerreteriaProMAX01.Controllers
             {
                 txtdni = "-1";
             }
+            if (txtcliente == "")
+            {
+                txtcliente = "-1";
+            }
             Persona objCliente = new Persona();
-            
-            objCliente.Codigo = txtcliente;
+            objCliente.Codigo = Int32.Parse(txtcliente);
             objCliente.nombre = txtnombre;
             objCliente.Primer_Apellido = txtappaterno;
             objCliente.Cedula = txtdni;
 
-
+            if (objCliente.Codigo!=-1){
+                    List<Persona> persona = m.Get(objCliente.nombre);
+                    return View(persona);
+            }
+            else if (!objCliente.nombre.ToString().Equals("-1"))
+            {
+                List<Persona> persona = m.Get(objCliente.nombre);
+                return View(persona);
+            }
+            else if (!objCliente.Primer_Apellido.ToString().Equals("-1"))
+            {
+                List<Persona> persona = m.Get(objCliente.Primer_Apellido);
+                return View(persona);
+            }
+            else if (!objCliente.Cedula.ToString().Equals("-1"))
+            {
+                List<Persona> persona = m.Get(objCliente.Cedula);
+                return View(persona);
+            }
+            else {
+                return View(db.Persona.ToList());
+            }
             //List<Persona> persona = db.Persona.Find(objCliente);
-            List<Persona> persona = m.Get(objCliente.nombre);
-            return View(persona);
+
         }
 
         protected override void Dispose(bool disposing)

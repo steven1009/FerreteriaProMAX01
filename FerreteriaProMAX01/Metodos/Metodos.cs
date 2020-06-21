@@ -9,7 +9,7 @@ namespace FerreteriaProMAX01.Metodos
 {
     public class Metodos
     {
-        private string conn = "Data Source=DESKTOP-FKU2C7A;integrated Security=sspi;initial catalog=FERRETERIADB;";
+        private string conn = "Data Source=DESKTOP-48V98DF;integrated Security=sspi;initial catalog=FERRETERIADB;";
         public int USUARIO_LOGINL(String usuario, String contraseña)
         {
             SqlConnection PubsConn = new SqlConnection(conn);
@@ -43,7 +43,7 @@ namespace FerreteriaProMAX01.Metodos
                 var persona = from item in dt.AsEnumerable()
                               select new Persona
                               {
-                                Cedula = Convert.ToString(item["Codigo"]),
+                                Cedula = Convert.ToString(item["Cedula"]),
                                 nombre = Convert.ToString(item["Nombre"]),
                                 Primer_Apellido = Convert.ToString(item["Primer_Apellido"]),
                                 Codigo = Convert.ToInt32(item["Codigo"]),

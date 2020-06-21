@@ -258,6 +258,21 @@ namespace FerreteriaProMAX01.Controllers
             //List<Persona> persona = db.Persona.Find(objCliente);
 
         }
+        [HttpPost]
+        public ActionResult Seleccionar(string idProducto)
+        {
+            Producto producto = db.Producto.Find(1);
+            Console.WriteLine((producto.IdProducto));
+            return Json(producto, JsonRequestBehavior.AllowGet);
+
+        }
+        //public ActionResult PruebaJson()
+        //{  // escribir la url directa  para ver el formato      
+        //    List<Producto> lista = objProductoNeg.findAll();
+        //    return Json(lista, JsonRequestBehavior.AllowGet);
+
+        //}
+
 
         protected override void Dispose(bool disposing)
         {

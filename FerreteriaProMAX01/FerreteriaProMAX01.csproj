@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PersonasController.cs" />
+    <Compile Include="Controllers\TipoPagoesController.cs" />
     <Compile Include="Controllers\USUARIO_LOGINController.cs" />
     <Compile Include="Controllers\VentasController.cs" />
     <Compile Include="Global.asax.cs">
@@ -355,6 +356,11 @@
     <Content Include="Views\Personas\Edit.cshtml" />
     <Content Include="Views\Personas\Index.cshtml" />
     <Content Include="Views\Ventas\ObtenerClientes.cshtml" />
+    <Content Include="Views\TipoPagoes\Create.cshtml" />
+    <Content Include="Views\TipoPagoes\Delete.cshtml" />
+    <Content Include="Views\TipoPagoes\Details.cshtml" />
+    <Content Include="Views\TipoPagoes\Edit.cshtml" />
+    <Content Include="Views\TipoPagoes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

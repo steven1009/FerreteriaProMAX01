@@ -9,7 +9,7 @@ namespace FerreteriaProMAX01.Metodos
 {
     public class Metodos
     {
-        private string conn = "Data Source=DESKTOP-48V98DF;integrated Security=sspi;initial catalog=FERRETERIADB;";
+        private string conn = "Data Source=DESKTOP-FKU2C7A;integrated Security=sspi;initial catalog=FERRETERIADB;";
         public int USUARIO_LOGINL(String usuario, String contraseña)
         {
             SqlConnection PubsConn = new SqlConnection(conn);
@@ -32,11 +32,10 @@ namespace FerreteriaProMAX01.Metodos
             DataTable dt = new DataTable();
             using (SqlConnection PubsConn = new SqlConnection(conn))
             {
-                SqlCommand testCMD = new SqlCommand("UserPassword", PubsConn);
+                SqlCommand testCMD = new SqlCommand("BuscarNombre", PubsConn);
                 PubsConn.Open();
                 testCMD.CommandType = CommandType.StoredProcedure;
-                testCMD.Parameters.AddWithValue("@usuario", nombre);
-                var r = 0;
+                testCMD.Parameters.AddWithValue("@nombre", nombre);
                 using (var da = new SqlDataAdapter(testCMD))
                 {
                     da.Fill(dt);
@@ -44,7 +43,10 @@ namespace FerreteriaProMAX01.Metodos
                 var persona = from item in dt.AsEnumerable()
                               select new Persona
                               {
-                                idPersona = Convert.ToInt32(item["idPersona"])
+                                Cedula = Convert.ToString(item["Codigo"]),
+                                nombre = Convert.ToString(item["Nombre"]),
+                                Primer_Apellido = Convert.ToString(item["Primer_Apellido"]),
+                                Codigo = Convert.ToInt32(item["Codigo"]),
                               };
                 return persona.ToList();
             }

@@ -3,10 +3,10 @@
     ViewBag.Title = "VentaN";
 }
 
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Js/alertify.min.js"></script>
-<link href="~/Css/alertify.core.css" rel="stylesheet" />
-<link href="~/Css/alertify.default.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/Js/alertify.min.js"></script>
+<link href="~/Content/Css/alertify.core.css" rel="stylesheet" />
+<link href="~/Content/Css/alertify.default.css" rel="stylesheet" />
 @*<meta http-equiv="refresh" content="6">*@
 
 
@@ -15,10 +15,9 @@
     $(document).ready(function () {
 
         $("a[rel='pop-up']").click(function () {
+            
             var caracteristicas = "height=550,width=1000,scrollTo,resizable=1,scrollbars=1,location=0";
             nueva = window.open(this.href, 'popup', caracteristicas);
-
-
             return false;
         });
         //botones
@@ -72,13 +71,12 @@
     var valor=0;
     var subtotal=0;
     function obtenerCliente(Cliente) {
-
-        var watchclose = setInterval(function () {
+        //var watchclose = setInterval(function () {
             $("#txtnombre").val(Cliente.DatosPersonales);
             $("#idCliente").val(Cliente.Identificacion);
             $("#codigoCliente").val(Cliente.Codigo);
 
-        });
+        //});
     }
 
     function fn_agregar() {
@@ -114,9 +112,13 @@
         $("#descuento").val("");
     }
     function limpiarCliente() {
-        $("tbody tr #txtnombre").val('');
-        $("tbody tr #idCliente").val('');
-        $("tbody tr #codigoCliente").val('');
+        $("#txtnombre").val("");
+        $("#idCliente").val("");
+        $("#codigoCliente").val("");
+    } function limpiarClientes() {
+        //document.getElementById("txtnombre").value("");
+        //document.getElementById("idClientee").value = "";
+        //document.getElementById("codigoCliente").value = "";    
     }
     function limpiarDetalle() {
         $("#detalle tbody tr").val("");
@@ -164,20 +166,22 @@
         <tr style="font-size:20px;">
             <td>
                 Detalles del Cliente
-                <a href='@(Url.Action("ObtenerPersona", "Ventas"))' rel="pop-up">
+                <a href='@(Url.Action("ObtenerClientes", "Ventas"))' rel="pop-up">
                     <input class="btn btn-warning btn-lg col-md-12" type="button" name="enlace_cliente" value="Obtener Cliente" />
                 </a>
             </td>
             <td>
                 Modo de Pago
                 <div class="col-md-12 dropdown">
+                    @Html.DropDownList("idPago", null, htmlAttributes: new { @class = "form-control" })
                     @*@Html.DropDownList("modoPago", ViewBag.ListaModoPago as SelectList, "Seleccione Modo Pago", htmlAttributes: new { @class = "form-control", @required = "required" })*@
                 </div>
             </td>
         </tr>
         <tr style="font-size:20px;">
 
-            <td>Nombre Cliente <input style="font-size:20px; font-weight:700;" class="form-control" type="text" id="txtnombre" readonly required /></td>
+            <td>Nombre Cliente 
+            <input style="font-size:20px; font-weight:700;" class="form-control" type="text" id="txtnombre" readonly required /></td>
             <td>
                 DNI
                 <input type="hidden" id="codigoCliente">

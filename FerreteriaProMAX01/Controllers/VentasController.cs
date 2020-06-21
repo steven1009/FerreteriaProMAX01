@@ -13,23 +13,49 @@ namespace FerreteriaProMAX01.Controllers
         // GET: Ventas
         public ActionResult Index()
         {
-            var ventas = db.Ventas.Include(v => v.Empleado).Include(v => v.Persona);
-            return View(ventas.ToList());
+            if (Session["id"] == null)
+            {
+                return RedirectToAction("Login", "Usuario_Login");
+            }
+            else if (!Session["id"].ToString().Equals("0"))
+            {
+                var ventas = db.Ventas.Include(v => v.Empleado).Include(v => v.Persona);
+                return View(ventas.ToList());
+            }
+            else
+            {
+                return RedirectToAction("Login", "Usuario_Login");
+            }
+
         }
 
         // GET: Ventas/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+
+            if (Session["id"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Usuario_Login");
             }
-            Ventas ventas = db.Ventas.Find(id);
-            if (ventas == null)
+            else if (!Session["id"].ToString().Equals("0"))
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Ventas ventas = db.Ventas.Find(id);
+                if (ventas == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(ventas);
             }
-            return View(ventas);
+            else
+            {
+                return RedirectToAction("Login", "Usuario_Login");
+            }
+
+
         }
 
         // GET: Ventas/Create
@@ -41,7 +67,7 @@ namespace FerreteriaProMAX01.Controllers
         }
 
         // POST: Ventas/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -62,22 +88,37 @@ namespace FerreteriaProMAX01.Controllers
         // GET: Ventas/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (Session["id"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Usuario_Login");
             }
-            Ventas ventas = db.Ventas.Find(id);
-            if (ventas == null)
+            else if (!Session["id"].ToString().Equals("0"))
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Ventas ventas = db.Ventas.Find(id);
+                if (ventas == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.idEmpleado = new SelectList(db.Empleado, "IdEmpleado", "IdEmpleado", ventas.idEmpleado);
+                ViewBag.idPersona = new SelectList(db.Persona, "idPersona", "Cedula", ventas.idPersona);
+                return View(ventas);
             }
-            ViewBag.idEmpleado = new SelectList(db.Empleado, "IdEmpleado", "IdEmpleado", ventas.idEmpleado);
-            ViewBag.idPersona = new SelectList(db.Persona, "idPersona", "Cedula", ventas.idPersona);
-            return View(ventas);
+            else
+            {
+                return RedirectToAction("Login", "Usuario_Login");
+            }
+
+
+
+
         }
 
         // POST: Ventas/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -97,16 +138,30 @@ namespace FerreteriaProMAX01.Controllers
         // GET: Ventas/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (Session["id"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Usuario_Login");
             }
-            Ventas ventas = db.Ventas.Find(id);
-            if (ventas == null)
+            else if (!Session["id"].ToString().Equals("0"))
             {
-                return HttpNotFound();
+
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Ventas ventas = db.Ventas.Find(id);
+                if (ventas == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(ventas);
             }
-            return View(ventas);
+            else
+            {
+                return RedirectToAction("Login", "Usuario_Login");
+            }
+
+
         }
 
         // POST: Ventas/Delete/5
@@ -127,7 +182,7 @@ namespace FerreteriaProMAX01.Controllers
         }
 
         // POST: Ventas/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]

@@ -13,22 +13,53 @@ namespace FerreteriaProMAX01.Controllers
         // GET: Personas
         public ActionResult Index()
         {
-            return View(db.Persona.ToList());
+            if (Session["id"] == null)
+            {
+                return RedirectToAction("Login", "Usuario_Login");
+            }
+            else if (!Session["id"].ToString().Equals("0"))
+            {
+
+
+                return View(db.Persona.ToList());
+            }
+            else
+            {
+                return RedirectToAction("Login", "Usuario_Login");
+            }
+
         }
 
         // GET: Personas/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (Session["id"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Usuario_Login");
             }
-            Persona persona = db.Persona.Find(id);
-            if (persona == null)
+            else if (!Session["id"].ToString().Equals("0"))
             {
-                return HttpNotFound();
+
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Persona persona = db.Persona.Find(id);
+                if (persona == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(persona);
+
             }
-            return View(persona);
+            else
+            {
+                return RedirectToAction("Login", "Usuario_Login");
+            }
+
+
+
+
         }
 
         // GET: Personas/Create
@@ -38,7 +69,7 @@ namespace FerreteriaProMAX01.Controllers
         }
 
         // POST: Personas/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -57,20 +88,36 @@ namespace FerreteriaProMAX01.Controllers
         // GET: Personas/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (Session["id"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Usuario_Login");
             }
-            Persona persona = db.Persona.Find(id);
-            if (persona == null)
+            else if (!Session["id"].ToString().Equals("0"))
             {
-                return HttpNotFound();
+
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Persona persona = db.Persona.Find(id);
+                if (persona == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(persona);
+
             }
-            return View(persona);
+            else
+            {
+                return RedirectToAction("Login", "Usuario_Login");
+            }
+
+
+
         }
 
         // POST: Personas/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -88,16 +135,32 @@ namespace FerreteriaProMAX01.Controllers
         // GET: Personas/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (Session["id"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Usuario_Login");
             }
-            Persona persona = db.Persona.Find(id);
-            if (persona == null)
+            else if (!Session["id"].ToString().Equals("0"))
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Persona persona = db.Persona.Find(id);
+                if (persona == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(persona);
+
             }
-            return View(persona);
+            else
+            {
+                return RedirectToAction("Login", "Usuario_Login");
+            }
+
+
+
+
         }
 
         // POST: Personas/Delete/5

@@ -16,30 +16,62 @@ namespace FerreteriaProMAX01.Controllers
         // GET: USUARIO_LOGIN
         public ActionResult Index()
         {
-            var uSUARIO_LOGIN = db.USUARIO_LOGIN.Include(u => u.Persona);
-            return View(uSUARIO_LOGIN.ToList());
+            if(Session["id"]==null)
+            {
+                return RedirectToAction("Login", "Usuario_Login");
+            }else if (!Session["id"].ToString().Equals("0")){
+                var uSUARIO_LOGIN = db.USUARIO_LOGIN.Include(u => u.Persona);
+                return View(uSUARIO_LOGIN.ToList());
+            }
+            else
+            {
+                return RedirectToAction("Login", "Usuario_Login");
+            }
         }
 
         // GET: USUARIO_LOGIN/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (Session["id"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Usuario_Login");
             }
-            USUARIO_LOGIN uSUARIO_LOGIN = db.USUARIO_LOGIN.Find(id);
-            if (uSUARIO_LOGIN == null)
+            else if (!Session["id"].ToString().Equals("0"))
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                USUARIO_LOGIN uSUARIO_LOGIN = db.USUARIO_LOGIN.Find(id);
+                if (uSUARIO_LOGIN == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(uSUARIO_LOGIN);
             }
-            return View(uSUARIO_LOGIN);
+            else
+            {
+                return RedirectToAction("Login", "Usuario_Login");
+            }
         }
 
         // GET: USUARIO_LOGIN/Create
         public ActionResult Create()
         {
-            ViewBag.idPersona = new SelectList(db.Persona, "idPersona", "Cedula");
-            return View();
+            if (Session["id"] == null)
+            {
+                return RedirectToAction("Login", "Usuario_Login");
+            }
+            else if (!Session["id"].ToString().Equals("0"))
+            {
+                ViewBag.idPersona = new SelectList(db.Persona, "idPersona", "Cedula");
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Usuario_Login");
+            }
+
         }
 
         // POST: USUARIO_LOGIN/Create
@@ -96,16 +128,28 @@ namespace FerreteriaProMAX01.Controllers
         // GET: USUARIO_LOGIN/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (Session["id"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Usuario_Login");
             }
-            USUARIO_LOGIN uSUARIO_LOGIN = db.USUARIO_LOGIN.Find(id);
-            if (uSUARIO_LOGIN == null)
+            else if (!Session["id"].ToString().Equals("0"))
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                USUARIO_LOGIN uSUARIO_LOGIN = db.USUARIO_LOGIN.Find(id);
+                if (uSUARIO_LOGIN == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(uSUARIO_LOGIN);
             }
-            return View(uSUARIO_LOGIN);
+            else
+            {
+                return RedirectToAction("Login", "Usuario_Login");
+            }
+           
         }
 
         // POST: USUARIO_LOGIN/Delete/5

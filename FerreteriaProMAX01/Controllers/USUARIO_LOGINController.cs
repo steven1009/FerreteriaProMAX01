@@ -152,7 +152,7 @@ namespace FerreteriaProMAX01.Controllers
             var result = false;
             if (uSUARIO_LOGIN == null)
             {
-                return HttpNotFound();
+                return View();
             }
             Session["id"] = uSUARIO_LOGIN.IdUsuario;
             result = true;

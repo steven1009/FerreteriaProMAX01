@@ -757,7 +757,6 @@
           <Property Name="Stok" Type="Int32" />
           <Property Name="IdCategoria" Type="Int32" />
           <Property Name="IdMarca" Type="Int32" />
-          <Property Name="IdProveedores" Type="Int32" />
           <NavigationProperty Name="Categoria" Relationship="Self.fk_Categoria" FromRole="Producto" ToRole="Categoria" />
           <NavigationProperty Name="CompraProdProv" Relationship="Self.fk_CompraProd" FromRole="Producto" ToRole="CompraProdProv" />
           <NavigationProperty Name="DetalleVenta" Relationship="Self.fk_Producto" FromRole="Producto" ToRole="DetalleVenta" />
@@ -1385,7 +1384,6 @@
                 <ScalarProperty Name="Stok" ColumnName="Stok" />
                 <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
                 <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />
-                <ScalarProperty Name="IdProveedores" ColumnName="IdProveedores" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

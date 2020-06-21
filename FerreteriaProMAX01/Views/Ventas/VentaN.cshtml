@@ -173,7 +173,7 @@
             <td>
                 Modo de Pago
                 <div class="col-md-12 dropdown">
-                    @Html.DropDownList("idPago", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownList("idPago", null, "Seleccione Modo Pago", htmlAttributes: new { @class = "form-control", @required = "required"})
                     @*@Html.DropDownList("modoPago", ViewBag.ListaModoPago as SelectList, "Seleccione Modo Pago", htmlAttributes: new { @class = "form-control", @required = "required" })*@
                 </div>
             </td>
@@ -197,6 +197,7 @@
 
                 <div class="form-group col-md-12">
                     <div class="col-md-9 dropdown">
+                        @Html.DropDownList("idProducto", null, "Seleccione un Producto", htmlAttributes: new { @class = "form-control", @required = "required" })
                         @*@Html.DropDownList("ListaProducto", ViewBag.ListaProducto as SelectList, "Seleccione un Producto", htmlAttributes: new { @class = "form-control" })*@
                     </div>
                     <div class="col-md-3">

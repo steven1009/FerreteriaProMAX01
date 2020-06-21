@@ -147,7 +147,7 @@ namespace FerreteriaProMAX01.Controllers
         [HttpGet]
         public ActionResult ObtenerClientes()
         {
-            return View(db.Persona.ToList());
+            return View();
         }
 
         [HttpPost]//para buscar clientes
@@ -171,7 +171,7 @@ namespace FerreteriaProMAX01.Controllers
             objCliente.Primer_Apellido = txtappaterno;
             objCliente.Cedula = txtdni;
 
-            //List<Persona> cliente = objClienteNeg.Ap(objCliente);
+            List<Persona> cliente = objClienteNeg.Ap(objCliente);
             return View();
         }
 

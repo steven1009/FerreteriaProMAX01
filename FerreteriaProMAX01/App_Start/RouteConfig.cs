@@ -135,6 +135,16 @@ namespace FerreteriaProMAX01
                 defaults: new { controller = "Ventas", action = "Create", id = UrlParameter.Optional }
             );
             routes.MapRoute(
+                name: "VentasN",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Ventas", action = "VentaN", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                name: "VentasaOC",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Ventas", action = "ObtenerClientes", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
                 name: "Inicio",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

@@ -14,12 +14,6 @@ body {
   min-height: 568px;
   background-color: #fff;
 }
-#Logint-Personalizado {
-    padding: 15px 15px;
-    min-height: 568px;
-    background-color: #fff;
-}
-
 @media (min-width: 768px) {
   #page-wrapper {
     position: inherit;
@@ -82,26 +76,24 @@ body {
   left: auto;
 }
 .sidebar .sidebar-nav.navbar-collapse {
-    padding-left: 10px;
-    padding-right:10px;
-    padding-bottom:30px;
-    padding-top:15px;
-    background-color: #C2D7E3;
+  padding-left: 0;
+  padding-right: 0;
+  
 }
 .sidebar .sidebar-search {
-  padding: 35px;
+  padding: 15px;
 }
 .sidebar ul li {
   border-bottom: 1px solid #e7e7e7;
 }
  .sidebar ul li a {
   font-size:20px;
-  font-weight:600;
+  font-weight:700;
 }
 
-    .sidebar ul li a.active {
-        background-color: #646364;
-    }
+.sidebar ul li a.active {
+  background-color: #eeeeee;
+}
 .sidebar .arrow {
   float: right;
 }
@@ -126,13 +118,12 @@ body {
     z-index: 1;
     position: absolute;
     width: 250px;
-    margin-top: 10px!important;
+    margin-top: 51px;
   }
   .navbar-top-links .dropdown-messages,
   .navbar-top-links .dropdown-tasks,
   .navbar-top-links .dropdown-alerts {
     margin-left: auto;
-
   }
 }
 .btn-outline {
@@ -260,16 +251,16 @@ table.dataTable thead .sorting:after {
 .huge {
   font-size: 40px;
 }
-/*.panel-green {
-    border-color: #646364;
+.panel-green {
+  border-color: #5cb85c;
 }
-    .panel-green > .panel-heading {
-        border-color: #5cb85c;
-        color: #757575;
-        background-color: #5cb85c;
-    }
+.panel-green > .panel-heading {
+  border-color: #5cb85c;
+  color: white;
+  background-color: #5cb85c;
+}
 .panel-green > a {
-  color: #428bca;
+  color: #5cb85c;
 }
 .panel-green > a:hover {
   color: #3d8b3d;
@@ -301,7 +292,7 @@ table.dataTable thead .sorting:after {
 }
 .panel-yellow > a:hover {
   color: #df8a13;
-}*/
+}
 .timeline {
   position: relative;
   padding: 20px 0 20px;

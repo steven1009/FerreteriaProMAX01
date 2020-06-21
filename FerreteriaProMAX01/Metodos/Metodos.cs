@@ -1,11 +1,6 @@
-﻿using FerreteriaProMAX01.Models;
-using Microsoft.Ajax.Utilities;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 
 namespace FerreteriaProMAX01.Metodos
 {
@@ -20,7 +15,7 @@ namespace FerreteriaProMAX01.Metodos
             testCMD.CommandType = CommandType.StoredProcedure;
             testCMD.Parameters.AddWithValue("@usuario", usuario);
             testCMD.Parameters.AddWithValue("@password", contraseña);
-            var r = (int) testCMD.ExecuteScalar();
+            var r = (int)testCMD.ExecuteScalar();
             PubsConn.Close();
             return r;
         }

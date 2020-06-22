@@ -46,7 +46,7 @@ namespace FerreteriaProMAX01.Metodos
         public int BuscarEmpleadoU(int usuario)
         {
             SqlConnection PubsConn = new SqlConnection(conn);
-            SqlCommand testCMD = new SqlCommand("BuscarProducto", PubsConn);
+            SqlCommand testCMD = new SqlCommand("BuscarEmpleado", PubsConn);
             PubsConn.Open();
             testCMD.CommandType = CommandType.StoredProcedure;
             testCMD.Parameters.AddWithValue("@idusuario", usuario);

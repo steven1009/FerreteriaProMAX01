@@ -9,7 +9,7 @@ namespace FerreteriaProMAX01.Metodos
 {
     public class Metodos
     {
-        private string conn = "Data Source=DESKTOP-48V98DF;integrated Security=sspi;initial catalog=FERRETERIADB;";
+        private string conn = "Data Source=DESKTOP-FKU2C7A;integrated Security=sspi;initial catalog=FERRETERIADB;";
         public int USUARIO_LOGINL(String usuario, String contraseña)
         {
             SqlConnection PubsConn = new SqlConnection(conn);
@@ -46,7 +46,7 @@ namespace FerreteriaProMAX01.Metodos
         public int BuscarEmpleadoU(int usuario)
         {
             SqlConnection PubsConn = new SqlConnection(conn);
-            SqlCommand testCMD = new SqlCommand("BuscarProducto", PubsConn);
+            SqlCommand testCMD = new SqlCommand("BuscarEmpleadoU", PubsConn);
             PubsConn.Open();
             testCMD.CommandType = CommandType.StoredProcedure;
             testCMD.Parameters.AddWithValue("@idusuario", usuario);

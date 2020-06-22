@@ -151,7 +151,7 @@
     <thead>
         <tr style="font-size:20px;">
             <th>Id Venta <input style="color:red; font-size:12px;" class="form-control" type="text" id="id_venta" readonly /></th>
-            <th>Id Empleado <input style="color:red; font-size:12px;" class="form-control" type="text" id="id_venta" readonly /></th>
+            <th>Id Empleado <input style="color:red; font-size:12px;" class="form-control" type="text" id="id_venta" value="@ViewBag.IdEmpleado" readonly /></th>
             <th>
                 Fecha
                 <input style="color:red;font-size:20px;" class="form-control" type="text" id="id_fecha" readonly value="@DateTime.Now.Year-@DateTime.Now.Month-@DateTime.Now.Day @DateTime.Now.Hour:@DateTime.Now.Minute:@DateTime.Now.Second" />
@@ -194,7 +194,7 @@
 
                 <div class="form-group col-md-12">
                     <div class="col-md-9 dropdown">
-                        @Html.DropDownList("ListaProducto", ViewBag.ListaProducto as SelectList, "Seleccione un Producto", htmlAttributes: new { @class = "form-control", @required = "required" })
+                        @Html.DropDownList("IdProductoL", null, htmlAttributes: new { @class = "form-control", @required = "required" })
                         @*@Html.DropDownList("ListaProducto", ViewBag.ListaProducto as SelectList, "Seleccione un Producto", htmlAttributes: new { @class = "form-control" })*@
                     </div>
                     <div class="col-md-3">
@@ -265,7 +265,7 @@
             $.ajax({
                 type: "POST",
                 url: "Seleccionar",
-                data: { idProducto: $("#ListaProducto").val() },
+                data: { idProducto: $("#IdProductoL").val() },
                 dataType: 'json',
                 success: function (mensaje) {
                     //alert(mensaje);

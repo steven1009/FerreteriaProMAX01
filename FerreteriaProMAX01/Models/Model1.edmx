@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FerreteriaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="FerreteriaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cargo">
           <Key>
             <PropertyRef Name="IdCargo" />
@@ -140,7 +140,6 @@
           <Property Name="Stok" Type="int" />
           <Property Name="IdCategoria" Type="int" />
           <Property Name="IdMarca" Type="int" />
-          <Property Name="IdProveedores" Type="int" />
         </EntityType>
         <EntityType Name="proveedores">
           <Key>
@@ -439,22 +438,29 @@
         <Function Name="BuscarCedula" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="cedula" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="BuscarCedulaP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cedula" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="BuscarCodigo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="codigo" Type="nvarchar" Mode="In" />
+          <Parameter Name="codigo" Type="int" Mode="In" />
         </Function>
         <Function Name="BuscarEmpleado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nombre" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="BuscarEmpleadoU" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idusuario" Type="int" Mode="In" />
         </Function>
         <Function Name="BuscarNombre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nombre" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="BuscarProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="nombre" Type="nvarchar" Mode="In" />
+          <Parameter Name="idproducto" Type="int" Mode="In" />
         </Function>
         <Function Name="BuscarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="usuario" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="ObtenerVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -591,8 +597,7 @@
             <End Role="DetalleVenta" EntitySet="DetalleVenta" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FerreteriaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1165,25 +1170,25 @@
             <End Role="Ventas" EntitySet="Ventas" />
           </AssociationSet>
           <FunctionImport Name="BuscarApellido" ReturnType="Collection(Int32)">
-            <Parameter Name="apellido" Mode="In" Type="String" />
+          <Parameter Name="apellido" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="BuscarCedula" ReturnType="Collection(Int32)">
-            <Parameter Name="cedula" Mode="In" Type="String" />
+          <Parameter Name="cedula" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="BuscarCodigo" ReturnType="Collection(Int32)">
-            <Parameter Name="codigo" Mode="In" Type="String" />
+          <Parameter Name="codigo" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="BuscarEmpleado" ReturnType="Collection(Int32)">
-            <Parameter Name="nombre" Mode="In" Type="String" />
+          <Parameter Name="nombre" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="BuscarNombre" ReturnType="Collection(Int32)">
-            <Parameter Name="nombre" Mode="In" Type="String" />
+          <Parameter Name="nombre" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="BuscarProducto" ReturnType="Collection(Int32)">
-            <Parameter Name="nombre" Mode="In" Type="String" />
+          <Parameter Name="idproducto" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="BuscarUsuario" ReturnType="Collection(Int32)">
-            <Parameter Name="usuario" Mode="In" Type="String" />
+          <Parameter Name="usuario" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -1219,6 +1224,13 @@
             <Parameter Name="usuario" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="BuscarCedulaP" ReturnType="Collection(FerreteriaDBModel.BuscarCedulaP_Result)">
+          <Parameter Name="cedula" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="BuscarEmpleadoU" ReturnType="Collection(Int32)">
+          <Parameter Name="idusuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ObtenerVenta" ReturnType="Collection(Int32)" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1230,6 +1242,12 @@
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="BuscarCedulaP_Result">
+          <Property Type="String" Name="Cedula" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="Primer_Apellido" Nullable="false" MaxLength="60" />
+          <Property Type="Int32" Name="Codigo" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1476,6 +1494,18 @@
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="FerreteriaDBModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="FerreteriaDBModel.Store.sp_upgraddiagrams" />
           <FunctionImportMapping FunctionImportName="UserPassword" FunctionName="FerreteriaDBModel.Store.UserPassword" />
+          <FunctionImportMapping FunctionImportName="BuscarCedulaP" FunctionName="FerreteriaDBModel.Store.BuscarCedulaP">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FerreteriaDBModel.BuscarCedulaP_Result">
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="Primer_Apellido" ColumnName="Primer_Apellido" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="BuscarEmpleadoU" FunctionName="FerreteriaDBModel.Store.BuscarEmpleadoU" />
+          <FunctionImportMapping FunctionImportName="ObtenerVenta" FunctionName="FerreteriaDBModel.Store.ObtenerVenta" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1490,7 +1520,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />

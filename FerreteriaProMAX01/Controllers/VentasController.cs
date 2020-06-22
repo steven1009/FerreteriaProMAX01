@@ -234,22 +234,22 @@ namespace FerreteriaProMAX01.Controllers
             objCliente.Cedula = txtdni;
 
             if (objCliente.Codigo!=-1){
-                    List<Persona> persona = m.Get(objCliente.nombre);
+                    List<Persona> persona = m.Get0((int)(objCliente.Codigo));
                     return View(persona);
             }
             else if (!objCliente.nombre.ToString().Equals("-1"))
             {
-                List<Persona> persona = m.Get(objCliente.nombre);
+                List<Persona> persona = m.Get1(objCliente.nombre);
                 return View(persona);
             }
             else if (!objCliente.Primer_Apellido.ToString().Equals("-1"))
             {
-                List<Persona> persona = m.Get(objCliente.Primer_Apellido);
+                List<Persona> persona = m.Get3(objCliente.Primer_Apellido);
                 return View(persona);
             }
             else if (!objCliente.Cedula.ToString().Equals("-1"))
             {
-                List<Persona> persona = m.Get(objCliente.Cedula);
+                List<Persona> persona = m.Get2(objCliente.Cedula);
                 return View(persona);
             }
             else {

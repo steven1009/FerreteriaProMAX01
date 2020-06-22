@@ -138,6 +138,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Metodos\Metodos.cs" />
+    <Compile Include="Models\BuscarCedulaP_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Cargo.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -243,6 +246,7 @@
     <Content Include="Content\menu\metisMenu.js" />
     <Content Include="Content\menu\metisMenu.min.css" />
     <Content Include="Content\menu\metisMenu.min.js" />
+    <Content Include="Content\SB-JS.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -303,7 +307,6 @@
     <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Content\bootstrap-4.5.0-dist.zip" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

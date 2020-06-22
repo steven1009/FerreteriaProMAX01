@@ -5,10 +5,11 @@
 }
 @using (Html.BeginForm())
 { }
-<link href="~/Content/Site.css" rel="stylesheet" />
-<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/SB-JS.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />`
+<body>
 <div class="form-signin">
-    <body>
+
 
         @using (Html.BeginForm("Login", "USUARIO_LOGIN", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {

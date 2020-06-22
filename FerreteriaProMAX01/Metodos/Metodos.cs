@@ -43,7 +43,32 @@ namespace FerreteriaProMAX01.Metodos
             PubsConn.Close();
             return r;
         }
-        public List<Persona> Get(String nombre)
+        public List<Persona> Get0(int codigo)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection PubsConn = new SqlConnection(conn))
+            {
+                SqlCommand testCMD = new SqlCommand("BuscarCodigo", PubsConn);
+                PubsConn.Open();
+                testCMD.CommandType = CommandType.StoredProcedure;
+                testCMD.Parameters.AddWithValue("@codigo", codigo);
+                using (var da = new SqlDataAdapter(testCMD))
+                {
+                    da.Fill(dt);
+                }
+                var persona = from item in dt.AsEnumerable()
+                              select new Persona
+                              {
+                                  Cedula = Convert.ToString(item["Cedula"]),
+                                  nombre = Convert.ToString(item["Nombre"]),
+                                  Primer_Apellido = Convert.ToString(item["Primer_Apellido"]),
+                                  Codigo = Convert.ToInt32(item["Codigo"]),
+                              };
+                return persona.ToList();
+            }
+
+        }
+        public List<Persona> Get1(String nombre)
         {
             DataTable dt = new DataTable();
             using (SqlConnection PubsConn = new SqlConnection(conn))
@@ -66,6 +91,58 @@ namespace FerreteriaProMAX01.Metodos
                               };
                 return persona.ToList();
             }
+
         }
+        public List<Persona> Get2(String cedula)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection PubsConn = new SqlConnection(conn))
+            {
+                SqlCommand testCMD = new SqlCommand("BuscarCedula", PubsConn);
+                PubsConn.Open();
+                testCMD.CommandType = CommandType.StoredProcedure;
+                testCMD.Parameters.AddWithValue("@cedula", cedula);
+                using (var da = new SqlDataAdapter(testCMD))
+                {
+                    da.Fill(dt);
+                }
+                var persona = from item in dt.AsEnumerable()
+                              select new Persona
+                              {
+                                  Cedula = Convert.ToString(item["Cedula"]),
+                                  nombre = Convert.ToString(item["Nombre"]),
+                                  Primer_Apellido = Convert.ToString(item["Primer_Apellido"]),
+                                  Codigo = Convert.ToInt32(item["Codigo"]),
+                              };
+                return persona.ToList();
+            }
+
+        }
+        public List<Persona> Get3(String Apellido)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection PubsConn = new SqlConnection(conn))
+            {
+                SqlCommand testCMD = new SqlCommand("BuscarApellido", PubsConn);
+                PubsConn.Open();
+                testCMD.CommandType = CommandType.StoredProcedure;
+                testCMD.Parameters.AddWithValue("@Apellido", Apellido);
+                using (var da = new SqlDataAdapter(testCMD))
+                {
+                    da.Fill(dt);
+                }
+                var persona = from item in dt.AsEnumerable()
+                              select new Persona
+                              {
+                                  Cedula = Convert.ToString(item["Cedula"]),
+                                  nombre = Convert.ToString(item["Nombre"]),
+                                  Primer_Apellido = Convert.ToString(item["Primer_Apellido"]),
+                                  Codigo = Convert.ToInt32(item["Codigo"]),
+                              };
+                return persona.ToList();
+            }
+
+        }
+
     }
 }

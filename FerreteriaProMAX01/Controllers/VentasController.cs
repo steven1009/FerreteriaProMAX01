@@ -324,8 +324,11 @@ namespace FerreteriaProMAX01.Controllers
                 }
                 //codigoPago = Convert.ToInt32(modoPago);
                 Persona persona = db.Persona.Find(m.BuscarCedulaP(Cedula));
-
-
+                //int
+                //if (persona == null) { 
+                
+                //}
+                //int 
 
                 //REGISTRO DE VENTA
                 Ventas venta1 = new Ventas();

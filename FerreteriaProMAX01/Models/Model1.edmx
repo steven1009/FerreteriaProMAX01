@@ -192,7 +192,7 @@
           <Property Name="idPersona" Type="int" Nullable="false" />
           <Property Name="idEmpleado" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Factura__idVenta__5812160E">
+        <Association Name="FK__Factura__idVenta__440B1D61">
           <End Role="Ventas" Type="Self.Ventas" Multiplicity="0..1" />
           <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
           <ReferentialConstraint>
@@ -204,7 +204,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__USUARIO_L__idPer__6383C8BA">
+        <Association Name="FK__USUARIO_L__idPer__534D60F1">
           <End Role="Persona" Type="Self.Persona" Multiplicity="0..1" />
           <End Role="USUARIO_LOGIN" Type="Self.USUARIO_LOGIN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -442,7 +442,7 @@
           <Parameter Name="cedula" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="BuscarCodigo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="codigo" Type="int" Mode="In" />
+          <Parameter Name="codigo" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="BuscarEmpleado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nombre" Type="nvarchar" Mode="In" />
@@ -454,10 +454,13 @@
           <Parameter Name="nombre" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="BuscarProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="idproducto" Type="int" Mode="In" />
+          <Parameter Name="nombre" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="BuscarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="usuario" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="DetailsVentas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idVenta" Type="int" Mode="In" />
         </Function>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="ObtenerVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -516,11 +519,11 @@
           <EntitySet Name="TipoPago" EntityType="Self.TipoPago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USUARIO_LOGIN" EntityType="Self.USUARIO_LOGIN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ventas" EntityType="Self.Ventas" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Factura__idVenta__5812160E" Association="Self.FK__Factura__idVenta__5812160E">
+          <AssociationSet Name="FK__Factura__idVenta__440B1D61" Association="Self.FK__Factura__idVenta__440B1D61">
             <End Role="Ventas" EntitySet="Ventas" />
             <End Role="Factura" EntitySet="Factura" />
           </AssociationSet>
-          <AssociationSet Name="FK__USUARIO_L__idPer__6383C8BA" Association="Self.FK__USUARIO_L__idPer__6383C8BA">
+          <AssociationSet Name="FK__USUARIO_L__idPer__534D60F1" Association="Self.FK__USUARIO_L__idPer__534D60F1">
             <End Role="Persona" EntitySet="Persona" />
             <End Role="USUARIO_LOGIN" EntitySet="USUARIO_LOGIN" />
           </AssociationSet>
@@ -1176,7 +1179,7 @@
           <Parameter Name="cedula" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="BuscarCodigo" ReturnType="Collection(Int32)">
-          <Parameter Name="codigo" Mode="In" Type="Int32" />
+          <Parameter Name="codigo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="BuscarEmpleado" ReturnType="Collection(Int32)">
           <Parameter Name="nombre" Mode="In" Type="String" />
@@ -1185,7 +1188,7 @@
           <Parameter Name="nombre" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="BuscarProducto" ReturnType="Collection(Int32)">
-          <Parameter Name="idproducto" Mode="In" Type="Int32" />
+          <Parameter Name="nombre" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="BuscarUsuario" ReturnType="Collection(Int32)">
           <Parameter Name="usuario" Mode="In" Type="String" />
@@ -1231,6 +1234,9 @@
           <Parameter Name="idusuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ObtenerVenta" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="DetailsVentas" ReturnType="Collection(FerreteriaDBModel.DetailsVentas_Result)">
+            <Parameter Name="idVenta" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1248,6 +1254,15 @@
           <Property Type="String" Name="nombre" Nullable="false" MaxLength="60" />
           <Property Type="String" Name="Primer_Apellido" Nullable="false" MaxLength="60" />
           <Property Type="Int32" Name="Codigo" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="DetailsVentas_Result">
+          <Property Type="Int32" Name="IdVenta" Nullable="true" />
+          <Property Type="Int32" Name="IdProducto" Nullable="true" />
+          <Property Type="Int32" Name="Cantidad" Nullable="true" />
+          <Property Type="Decimal" Name="SubTOTAL" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Descuento" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Iva" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Total" Nullable="true" Precision="19" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1506,6 +1521,19 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="BuscarEmpleadoU" FunctionName="FerreteriaDBModel.Store.BuscarEmpleadoU" />
           <FunctionImportMapping FunctionImportName="ObtenerVenta" FunctionName="FerreteriaDBModel.Store.ObtenerVenta" />
+          <FunctionImportMapping FunctionImportName="DetailsVentas" FunctionName="FerreteriaDBModel.Store.DetailsVentas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FerreteriaDBModel.DetailsVentas_Result">
+                <ScalarProperty Name="IdVenta" ColumnName="IdVenta" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="SubTOTAL" ColumnName="SubTOTAL" />
+                <ScalarProperty Name="Descuento" ColumnName="Descuento" />
+                <ScalarProperty Name="Iva" ColumnName="Iva" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

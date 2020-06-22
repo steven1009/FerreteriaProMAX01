@@ -13,7 +13,7 @@ namespace FerreteriaProMAX01.Controllers
     public class DetalleVentasController : Controller
     {
         private FerreteriaDBEntities db = new FerreteriaDBEntities();
-
+        Metodos.Metodos m = new Metodos.Metodos();
         // GET: DetalleVentas
         public ActionResult Index()
         {
@@ -29,6 +29,23 @@ namespace FerreteriaProMAX01.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             DetalleVenta detalleVenta = db.DetalleVenta.Find(id);
+            if (detalleVenta == null)
+            {
+                return HttpNotFound();
+            }
+            return View(detalleVenta);
+        }
+        public ActionResult DetailsVentas(int ? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            DetalleVenta detalleVenta1 = new DetalleVenta();
+            detalleVenta1.IdVenta =id;
+
+
+            List<DetalleVenta> detalleVenta = m.Get4((int)detalleVenta1.IdVenta);
             if (detalleVenta == null)
             {
                 return HttpNotFound();

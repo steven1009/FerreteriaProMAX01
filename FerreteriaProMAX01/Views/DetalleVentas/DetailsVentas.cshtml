@@ -1,0 +1,71 @@
+﻿
+@model IEnumerable<FerreteriaProMAX01.Models.DetalleVenta>
+
+@{
+    ViewBag.Title = "Detalle_Venta";
+}
+
+<h2>Detalle de ventas</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Cantidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubTOTAL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descuento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Iva)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Total)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Producto.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ventas.IdVenta)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cantidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubTOTAL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descuento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Iva)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Producto.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ventas.IdVenta)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.IdDetalleV }) |
+                @Html.ActionLink("Details", "Details", new { id = item.IdDetalleV }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.IdDetalleV })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -151,6 +151,9 @@
     <Compile Include="Models\CompraProdProv.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DetailsVentas_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DetalleEstado.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -377,6 +380,7 @@
     <Content Include="Views\DetalleVentas\Details.cshtml" />
     <Content Include="Views\DetalleVentas\Edit.cshtml" />
     <Content Include="Views\DetalleVentas\Index.cshtml" />
+    <Content Include="Views\DetalleVentas\DetailsVentas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

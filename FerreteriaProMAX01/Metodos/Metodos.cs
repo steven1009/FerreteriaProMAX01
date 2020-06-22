@@ -190,6 +190,34 @@ namespace FerreteriaProMAX01.Metodos
             }
 
         }
+        public List<DetalleVenta> Get4(int id)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection PubsConn = new SqlConnection(conn))
+            {
+                SqlCommand testCMD = new SqlCommand("DetailsVentas", PubsConn);
+                PubsConn.Open();
+                testCMD.CommandType = CommandType.StoredProcedure;
+                testCMD.Parameters.AddWithValue("@idVenta", id);
+                using (var da = new SqlDataAdapter(testCMD))
+                {
+                    da.Fill(dt);
+                }
+                var persona = from item in dt.AsEnumerable()
+                              select new DetalleVenta
+                              {
+                                  IdVenta = Convert.ToInt32(item["IdVenta"]),
+                                  IdProducto = Convert.ToInt32(item["IdProducto"]),
+                                  Cantidad = Convert.ToInt32(item["Cantidad"]),
+                                  SubTOTAL = Convert.ToDecimal(item["SubTOTAL"]),
+                                  Descuento = Convert.ToDecimal(item["Descuento"]),
+                                  Iva = Convert.ToDecimal(item["Iva"]),
+                                  Total = Convert.ToDecimal(item["Total"])
+                              };
+                return persona.ToList();
+            }
+
+        }
 
     }
 }

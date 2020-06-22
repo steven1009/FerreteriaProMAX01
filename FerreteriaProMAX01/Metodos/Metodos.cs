@@ -9,7 +9,7 @@ namespace FerreteriaProMAX01.Metodos
 {
     public class Metodos
     {
-        private string conn = "Data Source=DESKTOP-48V98DF;integrated Security=sspi;initial catalog=FERRETERIADB;";
+        private string conn = "Data Source=DESKTOP-FKU2C7A;integrated Security=sspi;initial catalog=FERRETERIADB;";
         public int USUARIO_LOGINL(String usuario, String contraseña)
         {
             SqlConnection PubsConn = new SqlConnection(conn);
@@ -34,6 +34,37 @@ namespace FerreteriaProMAX01.Metodos
             PubsConn.Open();
             testCMD.CommandType = CommandType.StoredProcedure;
             testCMD.Parameters.AddWithValue("@idProducto", id_Producto);
+            var r = 0;
+            if (testCMD.ExecuteScalar() == null)
+            {
+                return r;
+            }
+            r = (int)testCMD.ExecuteScalar();
+            PubsConn.Close();
+            return r;
+        }
+        public int BuscarCedulaP(String cedula)
+        {
+            SqlConnection PubsConn = new SqlConnection(conn);
+            SqlCommand testCMD = new SqlCommand("BuscarCedulaP", PubsConn);
+            PubsConn.Open();
+            testCMD.CommandType = CommandType.StoredProcedure;
+            testCMD.Parameters.AddWithValue("@cedula", cedula);
+            var r = 0;
+            if (testCMD.ExecuteScalar() == null)
+            {
+                return r;
+            }
+            r = (int)testCMD.ExecuteScalar();
+            PubsConn.Close();
+            return r;
+        }
+        public int ObtenerVentaT()
+        {
+            SqlConnection PubsConn = new SqlConnection(conn);
+            SqlCommand testCMD = new SqlCommand("ObtenerVenta", PubsConn);
+            PubsConn.Open();
+            testCMD.CommandType = CommandType.StoredProcedure;
             var r = 0;
             if (testCMD.ExecuteScalar() == null)
             {

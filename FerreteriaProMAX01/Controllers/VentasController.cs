@@ -179,10 +179,18 @@ namespace FerreteriaProMAX01.Controllers
         }
         public ActionResult VentaN()
         {
-
+            Ventas ventas1 = db.Ventas.Find(m.ObtenerVentaT());
+            if (ventas1 == null)
+            {
+                ViewBag.idVenta = 1;
+            }
+            else
+            {
+                ViewBag.idVenta = (int)ventas1.IdVenta + 1;
+            }
             ViewBag.IdEmpleado = Session["idempleado"];
             ViewBag.IdPago = new SelectList(db.TipoPago, "IdPago", "Nombre");
-            ViewBag.ListaProducto = new SelectList(db.Producto, "IdProducto", "Nombre");
+            ViewBag.IdProductoL = new SelectList(db.Producto, "IdProducto", "Nombre");
             return View();
         }
 
@@ -193,11 +201,21 @@ namespace FerreteriaProMAX01.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult VentaN([Bind(Include = "IdVenta,fecha,idPersona,idEmpleado")] Ventas ventas)
         {
+            
             if (ModelState.IsValid)
             {
                 db.Ventas.Add(ventas);
                 db.SaveChanges();
                 return RedirectToAction("Index");
+            }
+            Ventas ventas1 = db.Ventas.Find(m.ObtenerVentaT());
+            if (ventas1 == null)
+            {
+                ViewBag.idVenta = 1;
+            }
+            else
+            {
+                ViewBag.idVenta = (int)ventas1.IdVenta + 1;
             }
             ViewBag.IdEmpleado = Session["idempleado"];
             ViewBag.IdPago = new SelectList(db.TipoPago, "IdPago", "Nombre");
@@ -272,9 +290,6 @@ namespace FerreteriaProMAX01.Controllers
             producto.PrecioU = p.PrecioU;
                 //db.Producto.Find(1);
             return Json(producto, JsonRequestBehavior.AllowGet);
-            //Producto objProducto = new Producto(idProducto);
-            //objProductoNeg.find(objProducto);
-            //return Json(objProducto, JsonRequestBehavior.AllowGet);
         }
         //public ActionResult PruebaJson()
         //{  // escribir la url directa  para ver el formato
@@ -282,7 +297,69 @@ namespace FerreteriaProMAX01.Controllers
         //    return Json(lista, JsonRequestBehavior.AllowGet);
 
         //}
+        [HttpPost]
+        public ActionResult GuardarVenta(DateTime fecha, string Cedula, string idEmpleado,  List<DetalleVenta> ListadoDetalle)
+        {
+            string mensaje = "";
+            decimal iva = 0;
+            int idVenta = 0;
+            int codigoCliente = 0;
+            decimal total = 0;
 
+            if (Cedula=="" || idEmpleado == "")
+            {
+                if (Cedula == "") mensaje = "ERROR CON CEDULA DEL CLIENTE";
+                if (idEmpleado == "") mensaje = "ERROR EN EL ID DEL CLIENTE";
+            }
+            else
+            {
+                Ventas venta = db.Ventas.Find(m.ObtenerVentaT());
+                if (venta == null)
+                {
+                    idVenta = 1;
+                }
+                else
+                {
+                    idVenta = (int) venta.IdVenta + 1;
+                }
+                //codigoPago = Convert.ToInt32(modoPago);
+                Persona persona = db.Persona.Find(m.BuscarCedulaP(Cedula));
+
+
+
+                //REGISTRO DE VENTA
+                Ventas venta1 = new Ventas();
+                venta1.fecha = fecha;
+                venta1.idPersona = persona.idPersona;
+                venta1.idEmpleado = Int32.Parse(idEmpleado);
+                db.Ventas.Add(venta1);
+                db.SaveChanges();
+                foreach (var data in ListadoDetalle)
+                {
+                    int idProducto = Convert.ToInt32(data.IdProducto.ToString());
+                    int cantidad = Convert.ToInt32(data.Cantidad.ToString());
+                    decimal descuento = Convert.ToDecimal(data.Descuento.ToString());
+                    decimal subtotal = Convert.ToDecimal(data.SubTOTAL.ToString());
+                    iva = subtotal * (decimal) 0.15;
+                    total = subtotal - descuento - iva;
+                    DetalleVenta detalleVenta= new DetalleVenta();
+                    detalleVenta.IdVenta = idVenta;
+                    detalleVenta.IdProducto = idProducto;
+                    detalleVenta.Cantidad = cantidad;
+                    detalleVenta.SubTOTAL = subtotal;
+                    detalleVenta.Descuento = descuento;
+                    detalleVenta.Iva = iva;
+                    detalleVenta.Total = total;
+                    db.DetalleVenta.Add(detalleVenta);
+                    db.SaveChanges();
+
+
+                }
+                mensaje = "VENTA GUARDADA CON EXITO...";
+            }
+            return Json(mensaje);
+
+        }
 
         protected override void Dispose(bool disposing)
         {

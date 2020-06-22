@@ -15,7 +15,7 @@
     $(document).ready(function () {
 
         $("a[rel='pop-up']").click(function () {
-            
+
             var caracteristicas = "height=550,width=1000,scrollTo,resizable=1,scrollbars=1,location=0";
             nueva = window.open(this.href, 'popup', caracteristicas);
             return false;
@@ -115,7 +115,7 @@
         $("#txtnombre").val("");
         $("#idCliente").val("");
         $("#codigoCliente").val("");
-    } 
+    }
     function limpiarDetalle() {
         $("#detalle tbody tr").val("");
     }
@@ -176,7 +176,7 @@
         </tr>
         <tr style="font-size:20px;">
 
-            <td>Nombre Cliente 
+            <td>Nombre Cliente
             <input style="font-size:20px; font-weight:700;" class="form-control" type="text" id="txtnombre" readonly required /></td>
             <td>
                 DNI
@@ -193,7 +193,7 @@
 
                 <div class="form-group col-md-12">
                     <div class="col-md-9 dropdown">
-                        @Html.DropDownList("idProducto", null, "Seleccione un Producto", htmlAttributes: new { @class = "form-control", @required = "required" })
+                        @Html.DropDownList("ListaProducto", ViewBag.ListaProducto as SelectList, "Seleccione un Producto", htmlAttributes: new { @class = "form-control", @required = "required" })
                         @*@Html.DropDownList("ListaProducto", ViewBag.ListaProducto as SelectList, "Seleccione un Producto", htmlAttributes: new { @class = "form-control" })*@
                     </div>
                     <div class="col-md-3">
@@ -264,15 +264,16 @@
             $.ajax({
                 type: "POST",
                 url: "Seleccionar",
-                data: { idProducto: $("#idProducto").val() },
+                data: { idProducto: $("#ListaProducto").val() },
+                dataType: 'json',
                 success: function (mensaje) {
                     //alert(mensaje);
                     //$("#idproducto").val(mensaje.Nombre);
                     $(mensaje).each(function (index, item) {
                         //recibir datos json
-                        $("#nombreproducto").val(item.Nombre),
-                        $("#idproducto").val(item.IdProducto),
-                        $("#precio").val(item.PrecioUnitario)
+                        $("#idproducto").val(item.IdProducto);
+                        $("#nombreproducto").val(item.Nombre);
+                        $("#precio").val(item.PrecioU);
                     });
                 }
             });

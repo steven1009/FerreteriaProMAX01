@@ -1,98 +1,48 @@
-﻿@model FerreteriaProMAX01.Models.USUARIO_LOGIN
+﻿
+@model FerreteriaProMAX01.Models.USUARIO_LOGIN
 @{
     ViewBag.Title = "Login";
 }
 @using (Html.BeginForm())
 { }
+<link href="~/Content/Site.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<div class="form-signin">
+    <body>
 
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "USUARIO_LOGIN", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4>Utilice una cuenta local para iniciar sesión.</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Usuario, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Usuario, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Usuario, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Contraseña, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Contraseña, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Usuario, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                @*<div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
-                        </div>
-                    </div>*@
+        @using (Html.BeginForm("Login", "USUARIO_LOGIN", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <h4>Por favor Inicie de Sesión.</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Iniciar sesión" class="btn btn-default" />
-                    </div>
-                </div>
-                <p>
-                    @Html.ActionLink("Registrarse como usuario nuevo", "Register")
-                </p>
-                @* Habilite esta opción una vez tenga la confirmación de la cuenta habilitada para la funcionalidad de restablecimiento de contraseña
-                    <p>
-                        @Html.ActionLink("¿Ha olvidado su contraseña?", "ForgotPassword")
-                    </p>*@
-            }
-        </section>
-    </div>
-    @*<div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewMode { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>
-</div>*@
+            @Html.LabelFor(m => m.Usuario, new { @class = "col-md-2 control-label" })
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
-@*@Html.AntiForgeryToken()
+            @Html.TextBoxFor(m => m.Usuario, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Usuario, "", new { @class = "text-danger" })
 
-    <div class="row">
-        <div class=" centr col-lg-2">
-            <div class="logi">
-                <h4>Inicio de Sesión</h4>
 
-                @Html.LabelFor(model => model.Usuario, htmlAttributes: new { @class = " col-md-2" })
-                <div class="col-md-10">
-                @Html.EditorFor(model => model.Usuario, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Usuario, "", new { @class = "text-danger" })
-            </div>
+            @Html.LabelFor(m => m.Contraseña, new { @class = "col-md-2 control-label" })
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Contraseña, htmlAttributes: new { @class = " col-md-2" })
-                <div class="col-md-10">
-                @Html.EditorFor(model => model.Contraseña, new { htmlAttributes = new { @class = "form-control", type = "password" } })
-                @Html.ValidationMessageFor(model => model.Contraseña, "", new { @class = "text-danger" })
-            </div>
+            @Html.PasswordFor(m => m.Contraseña, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Usuario, "", new { @class = "text-danger" })
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Iniciar Sesión" class="btn btn-primary" />
-                </div>
-            </div>
-        </div>
-        </div>
+
+
+            <input type="submit" value="Iniciar sesión" class="btn btn-default" />
+
 
         }
 
+</div>
 
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }*@
+</body>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
 
 
+@{
+    Layout = null;
+}

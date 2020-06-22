@@ -180,7 +180,7 @@ namespace FerreteriaProMAX01.Controllers
         public ActionResult VentaN()
         {
             ViewBag.IdPago = new SelectList(db.TipoPago, "IdPago", "Nombre");
-            ViewBag.IdProducto = new SelectList(db.Producto, "IdProducto", "Nombre");
+            ViewBag.ListaProducto = new SelectList(db.Producto, "IdProducto", "Nombre");
             return View();
         }
 
@@ -199,7 +199,7 @@ namespace FerreteriaProMAX01.Controllers
             }
 
             ViewBag.IdPago = new SelectList(db.TipoPago, "IdPago", "Nombre");
-            ViewBag.IdProducto = new SelectList(db.Producto, "IdProducto", "Nombre");
+            ViewBag.ListaProducto = new SelectList(db.Producto, "IdProducto", "Nombre");
             return View(ventas);
         }
         [HttpGet]
@@ -258,16 +258,24 @@ namespace FerreteriaProMAX01.Controllers
             //List<Persona> persona = db.Persona.Find(objCliente);
 
         }
+
         [HttpPost]
         public ActionResult Seleccionar(string idProducto)
         {
-            Producto producto = db.Producto.Find(1);
-            Console.WriteLine((producto.IdProducto));
-            return Json(producto, JsonRequestBehavior.AllowGet);
+            Producto p = db.Producto.Find(Int32.Parse(idProducto));
 
+            Producto producto = new Producto();
+            producto.IdProducto = p.IdProducto;
+            producto.Nombre = p.Nombre;
+            producto.PrecioU = p.PrecioU;
+                //db.Producto.Find(1);
+            return Json(producto, JsonRequestBehavior.AllowGet);
+            //Producto objProducto = new Producto(idProducto);
+            //objProductoNeg.find(objProducto);
+            //return Json(objProducto, JsonRequestBehavior.AllowGet);
         }
         //public ActionResult PruebaJson()
-        //{  // escribir la url directa  para ver el formato      
+        //{  // escribir la url directa  para ver el formato
         //    List<Producto> lista = objProductoNeg.findAll();
         //    return Json(lista, JsonRequestBehavior.AllowGet);
 

@@ -179,7 +179,8 @@ namespace FerreteriaProMAX01.Controllers
         }
         public ActionResult VentaN()
         {
-            ViewBag.IdPago = new SelectList(db.TipoPago, "IdPago", "Nombre");
+
+            ViewBag.IdEmpleado = Session["idempleado"];
             ViewBag.IdPago = new SelectList(db.TipoPago, "IdPago", "Nombre");
             ViewBag.ListaProducto = new SelectList(db.Producto, "IdProducto", "Nombre");
             return View();
@@ -198,9 +199,9 @@ namespace FerreteriaProMAX01.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            ViewBag.IdEmpleado = Session["idempleado"];
             ViewBag.IdPago = new SelectList(db.TipoPago, "IdPago", "Nombre");
-            ViewBag.ListaProducto = new SelectList(db.Producto, "IdProducto", "Nombre");
+            ViewBag.IdProductoL = new SelectList(db.Producto, "IdProducto", "Nombre");
             return View(ventas);
         }
         [HttpGet]

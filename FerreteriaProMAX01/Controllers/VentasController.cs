@@ -180,6 +180,7 @@ namespace FerreteriaProMAX01.Controllers
         public ActionResult VentaN()
         {
             ViewBag.IdPago = new SelectList(db.TipoPago, "IdPago", "Nombre");
+            ViewBag.IdPago = new SelectList(db.TipoPago, "IdPago", "Nombre");
             ViewBag.ListaProducto = new SelectList(db.Producto, "IdProducto", "Nombre");
             return View();
         }

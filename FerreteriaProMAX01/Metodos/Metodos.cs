@@ -43,6 +43,22 @@ namespace FerreteriaProMAX01.Metodos
             PubsConn.Close();
             return r;
         }
+        public int BuscarEmpleadoU(int usuario)
+        {
+            SqlConnection PubsConn = new SqlConnection(conn);
+            SqlCommand testCMD = new SqlCommand("BuscarProducto", PubsConn);
+            PubsConn.Open();
+            testCMD.CommandType = CommandType.StoredProcedure;
+            testCMD.Parameters.AddWithValue("@idusuario", usuario);
+            var r = 0;
+            if (testCMD.ExecuteScalar() == null)
+            {
+                return r;
+            }
+            r = (int)testCMD.ExecuteScalar();
+            PubsConn.Close();
+            return r;
+        }
         public List<Persona> Get0(int codigo)
         {
             DataTable dt = new DataTable();

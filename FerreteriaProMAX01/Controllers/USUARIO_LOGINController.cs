@@ -199,6 +199,8 @@ namespace FerreteriaProMAX01.Controllers
                 return View();
             }
             Session["id"] = uSUARIO_LOGIN.IdUsuario;
+            Empleado empleado = db.Empleado.Find(m.BuscarEmpleadoU((int)Session["id"]));
+            Session["idempleado"] = empleado.IdEmpleado;
             result = true;
             switch (result)
             {

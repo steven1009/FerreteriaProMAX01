@@ -9,7 +9,7 @@ namespace FerreteriaProMAX01.Metodos
 {
     public class Metodos
     {
-        private string conn = "Data Source=DESKTOP-FKU2C7A;integrated Security=sspi;initial catalog=FERRETERIADB;";
+        private string conn = "Data Source=.;integrated Security=sspi;initial catalog=FERRETERIADB;";
         public int USUARIO_LOGINL(String usuario, String contraseña)
         {
             SqlConnection PubsConn = new SqlConnection(conn);
@@ -190,34 +190,49 @@ namespace FerreteriaProMAX01.Metodos
             }
 
         }
-        public List<DetalleVenta> Get4(int id)
+        //public List<DetalleVenta> Get4(int id)
+        //{
+        //    DataTable dt = new DataTable();
+        //    using (SqlConnection PubsConn = new SqlConnection(conn))
+        //    {
+        //        SqlCommand testCMD = new SqlCommand("DetailsVentas", PubsConn);
+        //        PubsConn.Open();
+        //        testCMD.CommandType = CommandType.StoredProcedure;
+        //        testCMD.Parameters.AddWithValue("@idVenta", id);
+        //        using (var da = new SqlDataAdapter(testCMD))
+        //        {
+        //            da.Fill(dt);
+        //        }
+        //        var persona = from item in dt.AsEnumerable()
+        //                      select new DetalleVenta
+        //                      {
+        //                          IdDetalleV = Convert.ToInt32(item["IdDetall"]),
+        //                          IdProducto = Convert.ToInt32(item["IdProducto"]),
+        //                          Cantidad = Convert.ToInt32(item["Cantidad"]),
+        //                          SubTOTAL = Convert.ToDecimal(item["SubTOTAL"]),
+        //                          Descuento = Convert.ToDecimal(item["Descuento"]),
+        //                          Iva = Convert.ToDecimal(item["Iva"]),
+        //                          Total = Convert.ToDecimal(item["Total"])
+        //                      };
+        //        return persona.ToList();
+        //    }
+
+        //}
+        public int Get4(int idDetall, int idVenta)
         {
-            DataTable dt = new DataTable();
-            using (SqlConnection PubsConn = new SqlConnection(conn))
+            SqlConnection PubsConn = new SqlConnection(conn);
+            SqlCommand testCMD = new SqlCommand("buscaventad", PubsConn);
+            PubsConn.Open();
+            testCMD.CommandType = CommandType.StoredProcedure;
+            testCMD.CommandType = CommandType.StoredProcedure;
+            var r = 0;
+            if (testCMD.ExecuteScalar() == null)
             {
-                SqlCommand testCMD = new SqlCommand("DetailsVentas", PubsConn);
-                PubsConn.Open();
-                testCMD.CommandType = CommandType.StoredProcedure;
-                testCMD.Parameters.AddWithValue("@idVenta", id);
-                using (var da = new SqlDataAdapter(testCMD))
-                {
-                    da.Fill(dt);
-                }
-                var persona = from item in dt.AsEnumerable()
-                              select new DetalleVenta
-                              {
-                                  IdVenta = Convert.ToInt32(item["IdVenta"]),
-                                  IdProducto = Convert.ToInt32(item["IdProducto"]),
-                                  Cantidad = Convert.ToInt32(item["Cantidad"]),
-                                  SubTOTAL = Convert.ToDecimal(item["SubTOTAL"]),
-                                  Descuento = Convert.ToDecimal(item["Descuento"]),
-                                  Iva = Convert.ToDecimal(item["Iva"]),
-                                  Total = Convert.ToDecimal(item["Total"])
-                              };
-                return persona.ToList();
+                return r;
             }
-
+            r = (int)testCMD.ExecuteScalar();
+            PubsConn.Close();
+            return r;
         }
-
     }
 }

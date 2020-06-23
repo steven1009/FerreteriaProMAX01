@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "Index";
-}
 
 <h2>Index</h2>
 
@@ -23,23 +22,24 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.fecha)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Empleado.IdEmpleado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Persona.Cedula)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdVenta }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdVenta }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IdVenta })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Empleado.IdEmpleado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Persona.Cedula)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.IdVenta })
+                <a href="@Url.Action("DetailsVentas", "DetalleVentas" , new { id = item.IdVenta })">Detalle</a>
+                @Html.ActionLink("Delete", "Delete", new { id = item.IdVenta })
+            </td>
+        </tr>
+    }
 
 </table>

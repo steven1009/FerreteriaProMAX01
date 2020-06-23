@@ -55,14 +55,13 @@
                 @Html.DisplayFor(modelItem => item.Total)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Producto.Nombre)
+                @Html.DisplayFor(modelItem => item.IdProducto)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Ventas.IdVenta)
+                @Html.DisplayFor(modelItem => item.IdVenta)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.IdDetalleV }) |
-                @Html.ActionLink("Details", "Details", new { id = item.IdDetalleV }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.IdDetalleV })
             </td>
         </tr>

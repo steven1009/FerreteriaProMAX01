@@ -4,54 +4,60 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<h2>Registrar un nuevo producto</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Nombre)
+            <ol>Nombre Producto</ol>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PrecioU)
+            <ol>Precio Unitario</ol>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Stok)
+            <ol>Unidades en existencias</ol>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Categoria.Nombre)
+            <ol>Categoria</ol>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Marca.Nombre)
+          <ol>Marca</ol>
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PrecioU)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Stok)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Categoria.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Marca.Nombre)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdProducto }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdProducto }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IdProducto })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrecioU)
+            </td>
+            <td>
+                 @Html.DisplayFor(modelItem => item.Stok)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categoria.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Marca.Nombre)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.IdProducto }) |
+                @Html.ActionLink("Details", "Details", new { id = item.IdProducto }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.IdProducto })
+            </td>
+        </tr>
+    }
 
 </table>
+<p>
+
+    <button class=" btn btn-secondary">@Html.ActionLink("Crear nuevo ", "Create")</button>
+</p>

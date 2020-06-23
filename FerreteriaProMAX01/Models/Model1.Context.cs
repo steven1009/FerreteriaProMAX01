@@ -66,11 +66,11 @@ namespace FerreteriaProMAX01.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("BuscarCedula", cedulaParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> BuscarCodigo(string codigo)
+        public virtual ObjectResult<Nullable<int>> BuscarCodigo(Nullable<int> codigo)
         {
-            var codigoParameter = codigo != null ?
+            var codigoParameter = codigo.HasValue ?
                 new ObjectParameter("codigo", codigo) :
-                new ObjectParameter("codigo", typeof(string));
+                new ObjectParameter("codigo", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("BuscarCodigo", codigoParameter);
         }
@@ -93,13 +93,13 @@ namespace FerreteriaProMAX01.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("BuscarNombre", nombreParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> BuscarProducto(string nombre)
+        public virtual ObjectResult<Nullable<int>> BuscarProducto(Nullable<int> idproducto)
         {
-            var nombreParameter = nombre != null ?
-                new ObjectParameter("nombre", nombre) :
-                new ObjectParameter("nombre", typeof(string));
+            var idproductoParameter = idproducto.HasValue ?
+                new ObjectParameter("idproducto", idproducto) :
+                new ObjectParameter("idproducto", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("BuscarProducto", nombreParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("BuscarProducto", idproductoParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> BuscarUsuario(string usuario)
@@ -257,6 +257,19 @@ namespace FerreteriaProMAX01.Models
                 new ObjectParameter("idVenta", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DetailsVentas_Result>("DetailsVentas", idVentaParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> buscarventad(Nullable<int> idDetallev, Nullable<int> idVenta)
+        {
+            var idDetallevParameter = idDetallev.HasValue ?
+                new ObjectParameter("idDetallev", idDetallev) :
+                new ObjectParameter("idDetallev", typeof(int));
+    
+            var idVentaParameter = idVenta.HasValue ?
+                new ObjectParameter("idVenta", idVenta) :
+                new ObjectParameter("idVenta", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("buscarventad", idDetallevParameter, idVentaParameter);
         }
     }
 }

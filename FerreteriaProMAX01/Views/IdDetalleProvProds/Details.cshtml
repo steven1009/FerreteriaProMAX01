@@ -1,0 +1,42 @@
+﻿@model FerreteriaProMAX01.Models.IdDetalleProvProd
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>IdDetalleProvProd</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Cantidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cantidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Precio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Precio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompraProdProv.IdCompraProdProv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompraProdProv.IdCompraProdProv)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdDetalleProvProd1 }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

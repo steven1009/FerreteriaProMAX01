@@ -1,0 +1,56 @@
+﻿@model FerreteriaProMAX01.Models.DetalleEstadoUsuario
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>DetalleEstadoUsuario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaInicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaInicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaFIN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaFIN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado.Estado1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado.Estado1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.USUARIO_LOGIN.Usuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.USUARIO_LOGIN.Usuario)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -271,5 +271,14 @@ namespace FerreteriaProMAX01.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("buscarventad", idDetallevParameter, idVentaParameter);
         }
+    
+        public virtual ObjectResult<sp_DettalleRoles_Result> sp_DettalleRoles(Nullable<int> idUsuario)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_DettalleRoles_Result>("sp_DettalleRoles", idUsuarioParameter);
+        }
     }
 }

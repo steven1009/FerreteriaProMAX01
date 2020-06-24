@@ -128,8 +128,19 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CargoesController.cs" />
+    <Compile Include="Controllers\CategoriasController.cs" />
+    <Compile Include="Controllers\CompraProdProvsController.cs" />
+    <Compile Include="Controllers\DetalleEstadoUsuariosController.cs" />
+    <Compile Include="Controllers\DetalleRolesController.cs" />
     <Compile Include="Controllers\DetalleVentasController.cs" />
+    <Compile Include="Controllers\Empleadoes1Controller.cs" />
+    <Compile Include="Controllers\EmpleadoesController.cs" />
+    <Compile Include="Controllers\EstadoesController.cs" />
+    <Compile Include="Controllers\FacturasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IdDetalleProvProdsController.cs" />
+    <Compile Include="Controllers\MarcasController.cs" />
     <Compile Include="Controllers\PersonasController.cs" />
     <Compile Include="Controllers\ProductoesController.cs" />
     <Compile Include="Controllers\TipoPagoesController.cs" />
@@ -206,6 +217,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Roles.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_DettalleRoles_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
@@ -381,6 +395,61 @@
     <Content Include="Views\DetalleVentas\Edit.cshtml" />
     <Content Include="Views\DetalleVentas\Index.cshtml" />
     <Content Include="Views\DetalleVentas\DetailsVentas.cshtml" />
+    <Content Include="Views\Facturas\Create.cshtml" />
+    <Content Include="Views\Facturas\Delete.cshtml" />
+    <Content Include="Views\Facturas\Details.cshtml" />
+    <Content Include="Views\Facturas\Edit.cshtml" />
+    <Content Include="Views\Facturas\Index.cshtml" />
+    <Content Include="Views\Empleadoes\Create.cshtml" />
+    <Content Include="Views\Empleadoes\Delete.cshtml" />
+    <Content Include="Views\Empleadoes\Details.cshtml" />
+    <Content Include="Views\Empleadoes\Edit.cshtml" />
+    <Content Include="Views\Empleadoes\Index.cshtml" />
+    <Content Include="Views\Cargoes\Create.cshtml" />
+    <Content Include="Views\Cargoes\Delete.cshtml" />
+    <Content Include="Views\Cargoes\Details.cshtml" />
+    <Content Include="Views\Cargoes\Edit.cshtml" />
+    <Content Include="Views\Cargoes\Index.cshtml" />
+    <Content Include="Views\Categorias\Create.cshtml" />
+    <Content Include="Views\Categorias\Delete.cshtml" />
+    <Content Include="Views\Categorias\Details.cshtml" />
+    <Content Include="Views\Categorias\Edit.cshtml" />
+    <Content Include="Views\Categorias\Index.cshtml" />
+    <Content Include="Views\DetalleRoles\Create.cshtml" />
+    <Content Include="Views\DetalleRoles\Delete.cshtml" />
+    <Content Include="Views\DetalleRoles\Details.cshtml" />
+    <Content Include="Views\DetalleRoles\Edit.cshtml" />
+    <Content Include="Views\DetalleRoles\Index.cshtml" />
+    <Content Include="Views\CompraProdProvs\Create.cshtml" />
+    <Content Include="Views\CompraProdProvs\Delete.cshtml" />
+    <Content Include="Views\CompraProdProvs\Details.cshtml" />
+    <Content Include="Views\CompraProdProvs\Edit.cshtml" />
+    <Content Include="Views\CompraProdProvs\Index.cshtml" />
+    <Content Include="Views\DetalleEstadoUsuarios\Create.cshtml" />
+    <Content Include="Views\DetalleEstadoUsuarios\Delete.cshtml" />
+    <Content Include="Views\DetalleEstadoUsuarios\Details.cshtml" />
+    <Content Include="Views\DetalleEstadoUsuarios\Edit.cshtml" />
+    <Content Include="Views\DetalleEstadoUsuarios\Index.cshtml" />
+    <Content Include="Views\Empleadoes1\Create.cshtml" />
+    <Content Include="Views\Empleadoes1\Delete.cshtml" />
+    <Content Include="Views\Empleadoes1\Details.cshtml" />
+    <Content Include="Views\Empleadoes1\Edit.cshtml" />
+    <Content Include="Views\Empleadoes1\Index.cshtml" />
+    <Content Include="Views\Estadoes\Create.cshtml" />
+    <Content Include="Views\Estadoes\Delete.cshtml" />
+    <Content Include="Views\Estadoes\Details.cshtml" />
+    <Content Include="Views\Estadoes\Edit.cshtml" />
+    <Content Include="Views\Estadoes\Index.cshtml" />
+    <Content Include="Views\Marcas\Create.cshtml" />
+    <Content Include="Views\Marcas\Delete.cshtml" />
+    <Content Include="Views\Marcas\Details.cshtml" />
+    <Content Include="Views\Marcas\Edit.cshtml" />
+    <Content Include="Views\Marcas\Index.cshtml" />
+    <Content Include="Views\IdDetalleProvProds\Create.cshtml" />
+    <Content Include="Views\IdDetalleProvProds\Delete.cshtml" />
+    <Content Include="Views\IdDetalleProvProds\Details.cshtml" />
+    <Content Include="Views\IdDetalleProvProds\Edit.cshtml" />
+    <Content Include="Views\IdDetalleProvProds\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

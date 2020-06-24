@@ -80,9 +80,17 @@ else if (!Session["id"].ToString().Equals("0"))
                             </li>
                         </ul>
                     </li>
+                   @if (Session["Idroles"].ToString().Equals("Administrador"))
+                   {
+
+
                     <li>
+
+
                         <a><i class="fa fa-wrench fa-fw"></i> Administración<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
+
+
                             <li>
                                 <a href='@(Url.Action("Index", "Usuario_login"))'><i class="fa fa-user fa-fw" style="color:#EABE3F "></i>Usuarios</a>
                             </li>
@@ -91,6 +99,7 @@ else if (!Session["id"].ToString().Equals("0"))
                             </li>
                         </ul>
                     </li>
+                   }
                 </ul>
             </div>
 

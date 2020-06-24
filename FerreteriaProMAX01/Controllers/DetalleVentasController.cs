@@ -43,18 +43,7 @@ namespace FerreteriaProMAX01.Controllers
             }
             DetalleVenta detalleVenta1 = new DetalleVenta();
             detalleVenta1.IdVenta =id;
-            var detalleventa;
-
-            for(int i=0; i<2; i++)
-            {
-                if(m.Get4(i,(int)detalleVenta1.IdVenta)!=0)
-                {
-                    detalleventa = db.DetalleVenta.Find(m.Get4(i, (int)detalleVenta1.IdVenta));
-                    detalleventa= detalleventa.In
-
-                }
-            }
-            //var detalleVenta = db.DetalleVenta.Include(d => d.Producto).Include(d => d.Ventas);
+            List<DetalleVenta> detalleVenta = m.Get4((int) detalleVenta1.IdVenta);
 
             if (detalleVenta == null)
             {

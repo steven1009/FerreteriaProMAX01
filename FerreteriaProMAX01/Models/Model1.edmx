@@ -480,6 +480,9 @@
           <Parameter Name="version" Type="int" Mode="In" />
           <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
         </Function>
+        <Function Name="sp_DettalleRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUsuario" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -1245,6 +1248,9 @@
             <Parameter Name="idDetallev" Mode="In" Type="Int32" />
             <Parameter Name="idVenta" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="sp_DettalleRoles" ReturnType="Collection(FerreteriaDBModel.sp_DettalleRoles_Result)">
+          <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1271,6 +1277,12 @@
           <Property Type="Decimal" Name="Descuento" Nullable="true" Precision="19" />
           <Property Type="Decimal" Name="Iva" Nullable="true" Precision="19" />
           <Property Type="Decimal" Name="Total" Nullable="true" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="sp_DettalleRoles_Result">
+          <Property Type="Int32" Name="Id_DetalleRoles" Nullable="false" />
+          <Property Type="Int32" Name="IdUsuario" Nullable="true" />
+          <Property Type="DateTime" Name="FechaMOD" Nullable="true" />
+          <Property Type="Int32" Name="IdRoles" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1543,6 +1555,16 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="buscarventad" FunctionName="FerreteriaDBModel.Store.buscarventad" />
+          <FunctionImportMapping FunctionImportName="sp_DettalleRoles" FunctionName="FerreteriaDBModel.Store.sp_DettalleRoles">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FerreteriaDBModel.sp_DettalleRoles_Result">
+                <ScalarProperty Name="Id_DetalleRoles" ColumnName="Id_DetalleRoles" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="FechaMOD" ColumnName="FechaMOD" />
+                <ScalarProperty Name="IdRoles" ColumnName="IdRoles" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

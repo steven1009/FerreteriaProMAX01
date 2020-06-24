@@ -149,7 +149,7 @@ namespace FerreteriaProMAX01.Controllers
             {
                 return RedirectToAction("Login", "Usuario_Login");
             }
-           
+
         }
 
         // POST: USUARIO_LOGIN/Delete/5
@@ -201,6 +201,8 @@ namespace FerreteriaProMAX01.Controllers
             Session["id"] = uSUARIO_LOGIN.IdUsuario;
             Empleado empleado = db.Empleado.Find(m.BuscarEmpleadoU((int)Session["id"]));
             Session["idempleado"] = empleado.IdEmpleado;
+            DetalleRoles Rolesdetail = db.DetalleRoles.Find(m.BuscarRolU((int)Session["id"]));
+            Session["Idroles"] =Rolesdetail.IdRoles;
             result = true;
             switch (result)
             {

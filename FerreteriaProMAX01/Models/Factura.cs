@@ -21,6 +21,7 @@ namespace FerreteriaProMAX01.Models
         public Nullable<decimal> Descuento { get; set; }
         public Nullable<int> IdPago { get; set; }
         public Nullable<int> idVenta { get; set; }
+        public Nullable<decimal> subtotal { get; set; }
     
         public virtual Ventas Ventas { get; set; }
         public virtual TipoPago TipoPago { get; set; }

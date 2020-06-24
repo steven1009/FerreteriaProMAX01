@@ -13,11 +13,11 @@ namespace FerreteriaProMAX01.Controllers
     public class CompraProdProvsController : Controller
     {
         private FerreteriaDBEntities db = new FerreteriaDBEntities();
-        Metodos.Metodos m = new Metodos.Metodos();
+
         // GET: CompraProdProvs
         public ActionResult Index()
         {
-            var compraProdProv = db.CompraProdProv.Include(c => c.Producto).Include(c => c.proveedores);
+            var compraProdProv = db.CompraProdProv.Include(c => c.proveedores);
             return View(compraProdProv.ToList());
         }
 
@@ -39,17 +39,16 @@ namespace FerreteriaProMAX01.Controllers
         // GET: CompraProdProvs/Create
         public ActionResult Create()
         {
-            ViewBag.IdProducto = new SelectList(db.Producto, "IdProducto", "Nombre");
             ViewBag.IdProveedores = new SelectList(db.proveedores, "IdProveedores", "Nombre");
             return View();
         }
 
         // POST: CompraProdProvs/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener
-        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
+        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdCompraProdProv,Fecha,IdProveedores,IdProducto")] CompraProdProv compraProdProv)
+        public ActionResult Create([Bind(Include = "IdCompraProdProv,Fecha,IdProveedores")] CompraProdProv compraProdProv)
         {
             if (ModelState.IsValid)
             {
@@ -58,7 +57,6 @@ namespace FerreteriaProMAX01.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IdProducto = new SelectList(db.Producto, "IdProducto", "Nombre", compraProdProv.IdProducto);
             ViewBag.IdProveedores = new SelectList(db.proveedores, "IdProveedores", "Nombre", compraProdProv.IdProveedores);
             return View(compraProdProv);
         }
@@ -75,17 +73,16 @@ namespace FerreteriaProMAX01.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.IdProducto = new SelectList(db.Producto, "IdProducto", "Nombre", compraProdProv.IdProducto);
             ViewBag.IdProveedores = new SelectList(db.proveedores, "IdProveedores", "Nombre", compraProdProv.IdProveedores);
             return View(compraProdProv);
         }
 
         // POST: CompraProdProvs/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener
-        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
+        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdCompraProdProv,Fecha,IdProveedores,IdProducto")] CompraProdProv compraProdProv)
+        public ActionResult Edit([Bind(Include = "IdCompraProdProv,Fecha,IdProveedores")] CompraProdProv compraProdProv)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +90,6 @@ namespace FerreteriaProMAX01.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IdProducto = new SelectList(db.Producto, "IdProducto", "Nombre", compraProdProv.IdProducto);
             ViewBag.IdProveedores = new SelectList(db.proveedores, "IdProveedores", "Nombre", compraProdProv.IdProveedores);
             return View(compraProdProv);
         }
@@ -132,154 +128,5 @@ namespace FerreteriaProMAX01.Controllers
             }
             base.Dispose(disposing);
         }
-
-
-        public ActionResult CompraN()
-        {
-            ViewBag.IdEmpleado = Session["idempleado"];
-            ViewBag.IdPago = new SelectList(db.TipoPago, "IdPago", "Nombre");
-            ViewBag.IdProductoL = new SelectList(db.Producto, "IdProducto", "Nombre");
-            return View();
-        }
-
-        // POST: Ventas/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult CompraN([Bind(Include = "IdCompra,Fecha,idProveedores,idProducto")] CompraProdProv compra)
-        {
-
-            if (ModelState.IsValid)
-            {
-                db.CompraProdProv.Add(compra);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.IdEmpleado = Session["idempleado"];
-            ViewBag.IdPago = new SelectList(db.TipoPago, "IdPago", "Nombre");
-            ViewBag.IdProductoL = new SelectList(db.Producto, "IdProducto", "Nombre");
-            return View(compra);
-        }
-        [HttpGet]
-        public ActionResult ObtenerProveedores()
-        {
-            return View(db.proveedores.ToList());
-        }
-
-        [HttpPost]//para buscar clientes
-        public ActionResult ObtenerProveedores(string txtnombre)
-        {
-            if (txtnombre == "")
-            {
-                txtnombre = "-1";
-            }
-            
-            proveedores prov = new Models.proveedores();
-            prov.Nombre = txtnombre;
-
-            
-                List<proveedores> proveedores = m.Get5(prov.Nombre);
-                return View(proveedores);
-            
-
-        }
-
-        [HttpPost]
-        public ActionResult Seleccionar(string idProducto)
-        {
-            Producto p = db.Producto.Find(Int32.Parse(idProducto));
-
-            Producto producto = new Producto();
-            producto.IdProducto = p.IdProducto;
-            producto.Nombre = p.Nombre;
-            producto.PrecioU = p.PrecioU;
-            //db.Producto.Find(1);
-            return Json(producto, JsonRequestBehavior.AllowGet);
-        }
-        //public ActionResult PruebaJson()
-        //{  // escribir la url directa  para ver el formato
-        //    List<Producto> lista = objProductoNeg.findAll();
-        //    return Json(lista, JsonRequestBehavior.AllowGet);
-
-        //}
-        [HttpPost]
-        public ActionResult GuardarCompra(DateTime Fecha, string Nombre, string idEmpleado, string total1, List<CompraProdProv> ListadoCompra)
-        {
-            string mensaje = "";
-            decimal iva = 0;
-            int idCompra = 0;
-            decimal total = 0;
-
-            if (idEmpleado == "")
-            {
-                if (idEmpleado == "") mensaje = "ERROR EN EL ID DEL CLIENTE";
-            }
-            else
-            {
-                CompraProdProv compra = db.CompraProdProv.Find(m.ObtenerVentaT());
-                if (compra == null)
-                {
-                    idCompra= 1;
-                }
-                else
-                {
-                    idCompra = (int)compra.IdCompraProdProv + 1;
-                }
-                //codigoPago = Convert.ToInt32(modoPago);
-                Persona persona = db.proveedores.Find(m.BuscarProv(Nombre));
-                //int
-                //if (persona == null) { 
-
-                //}
-                //int 
-
-                //REGISTRO DE VENTA
-                CompraProdProv compra1 = new CompraProdProv();
-                compra1.Fecha = Fecha;
-                compra1.IdProducto = persona.idPersona;
-                compra1.idEmpleado = Int32.Parse(idEmpleado);
-                db.Ventas.Add(venta1);
-                db.SaveChanges();
-                decimal tdescuento = (decimal)0;
-                int indexv = m.ObtenerVentaT();
-                foreach (var data in ListadoDetalle)
-                {
-                    int idProducto = Convert.ToInt32(data.IdProducto.ToString());
-                    int cantidad = Convert.ToInt32(data.Cantidad.ToString());
-                    decimal descuento = Convert.ToDecimal(data.Descuento.ToString());
-                    tdescuento = tdescuento + descuento;
-                    decimal subtotal = Convert.ToDecimal(data.SubTOTAL.ToString());
-                    iva = subtotal * (decimal)0.15;
-                    total = subtotal - descuento + iva;
-                    DetalleVenta detalleVenta = new DetalleVenta();
-                    detalleVenta.IdVenta = indexv;
-                    detalleVenta.IdProducto = idProducto;
-                    detalleVenta.Cantidad = cantidad;
-                    detalleVenta.SubTOTAL = subtotal;
-                    detalleVenta.Descuento = descuento;
-                    detalleVenta.Iva = iva;
-                    detalleVenta.Total = total;
-                    db.DetalleVenta.Add(detalleVenta);
-                    db.SaveChanges();
-
-
-                }
-                Factura factura = new Factura();
-                factura.IdPago = 1;
-                factura.idVenta = indexv;
-                factura.Fecha = fecha;
-                factura.Descuento = tdescuento;
-                factura.Iva = (Convert.ToDecimal(total1) - tdescuento) * (decimal)0.15;
-                factura.Total = (float)(Convert.ToDecimal(total1) + (Convert.ToDecimal(total1) - tdescuento) * (decimal)0.15);
-
-                db.Factura.Add(factura);
-                db.SaveChanges();
-                mensaje = "VENTA GUARDADA CON EXITO...";
-            }
-            return Json(mensaje);
-
-        }
-
     }
 }

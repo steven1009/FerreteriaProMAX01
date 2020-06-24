@@ -27,7 +27,6 @@
           <Property Name="IdCompraProdProv" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Fecha" Type="date" />
           <Property Name="IdProveedores" Type="int" />
-          <Property Name="IdProducto" Type="int" />
         </EntityType>
         <EntityType Name="DetalleEstado">
           <Key>
@@ -97,6 +96,7 @@
           <Property Name="Descuento" Type="money" />
           <Property Name="IdPago" Type="int" />
           <Property Name="idVenta" Type="int" />
+          <Property Name="subtotal" Type="money" />
         </EntityType>
         <EntityType Name="IdDetalleProvProd">
           <Key>
@@ -106,6 +106,8 @@
           <Property Name="Cantidad" Type="int" />
           <Property Name="Precio" Type="money" />
           <Property Name="IdCompraProdProv" Type="int" />
+          <Property Name="idProducto" Type="int" />
+          <Property Name="total" Type="money" />
         </EntityType>
         <EntityType Name="Marca">
           <Key>
@@ -240,18 +242,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_CompraProd">
-          <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
-          <End Role="CompraProdProv" Type="Self.CompraProdProv" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Producto">
-              <PropertyRef Name="IdProducto" />
-            </Principal>
-            <Dependent Role="CompraProdProv">
-              <PropertyRef Name="IdProducto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_CompraProv">
           <End Role="proveedores" Type="Self.proveedores" Multiplicity="0..1" />
           <End Role="CompraProdProv" Type="Self.CompraProdProv" Multiplicity="*" />
@@ -273,6 +263,18 @@
             </Principal>
             <Dependent Role="IdDetalleProvProd">
               <PropertyRef Name="IdCompraProdProv" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_DetalleCompraProd">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
+          <End Role="IdDetalleProvProd" Type="Self.IdDetalleProvProd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="IdDetalleProvProd">
+              <PropertyRef Name="idProducto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -538,16 +540,16 @@
             <End Role="Categoria" EntitySet="Categoria" />
             <End Role="Producto" EntitySet="Producto" />
           </AssociationSet>
-          <AssociationSet Name="fk_CompraProd" Association="Self.fk_CompraProd">
-            <End Role="Producto" EntitySet="Producto" />
-            <End Role="CompraProdProv" EntitySet="CompraProdProv" />
-          </AssociationSet>
           <AssociationSet Name="fk_CompraProv" Association="Self.fk_CompraProv">
             <End Role="proveedores" EntitySet="proveedores" />
             <End Role="CompraProdProv" EntitySet="CompraProdProv" />
           </AssociationSet>
           <AssociationSet Name="fk_DetalleCompra" Association="Self.fk_DetalleCompra">
             <End Role="CompraProdProv" EntitySet="CompraProdProv" />
+            <End Role="IdDetalleProvProd" EntitySet="IdDetalleProvProd" />
+          </AssociationSet>
+          <AssociationSet Name="fk_DetalleCompraProd" Association="Self.fk_DetalleCompraProd">
+            <End Role="Producto" EntitySet="Producto" />
             <End Role="IdDetalleProvProd" EntitySet="IdDetalleProvProd" />
           </AssociationSet>
           <AssociationSet Name="fk_estado" Association="Self.fk_estado">
@@ -631,8 +633,6 @@
           <Property Name="IdCompraProdProv" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Fecha" Type="DateTime" Precision="0" />
           <Property Name="IdProveedores" Type="Int32" />
-          <Property Name="IdProducto" Type="Int32" />
-          <NavigationProperty Name="Producto" Relationship="Self.fk_CompraProd" FromRole="CompraProdProv" ToRole="Producto" />
           <NavigationProperty Name="proveedores" Relationship="Self.fk_CompraProv" FromRole="CompraProdProv" ToRole="proveedores" />
           <NavigationProperty Name="IdDetalleProvProd" Relationship="Self.fk_DetalleCompra" FromRole="CompraProdProv" ToRole="IdDetalleProvProd" />
         </EntityType>
@@ -720,6 +720,7 @@
           <Property Name="idVenta" Type="Int32" />
           <NavigationProperty Name="Ventas" Relationship="Self.FK__Factura__idVenta__5812160E" FromRole="Factura" ToRole="Ventas" />
           <NavigationProperty Name="TipoPago" Relationship="Self.fk_TipoPago" FromRole="Factura" ToRole="TipoPago" />
+          <Property Name="subtotal" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
         <EntityType Name="IdDetalleProvProd">
           <Key>
@@ -730,6 +731,9 @@
           <Property Name="Precio" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="IdCompraProdProv" Type="Int32" />
           <NavigationProperty Name="CompraProdProv" Relationship="Self.fk_DetalleCompra" FromRole="IdDetalleProvProd" ToRole="CompraProdProv" />
+          <Property Name="idProducto" Type="Int32" />
+          <Property Name="total" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Producto" Relationship="FerreteriaDBModel.fk_DetalleCompraProd" FromRole="IdDetalleProvProd" ToRole="Producto" />
         </EntityType>
         <EntityType Name="Marca">
           <Key>
@@ -769,9 +773,9 @@
           <Property Name="IdCategoria" Type="Int32" />
           <Property Name="IdMarca" Type="Int32" />
           <NavigationProperty Name="Categoria" Relationship="Self.fk_Categoria" FromRole="Producto" ToRole="Categoria" />
-          <NavigationProperty Name="CompraProdProv" Relationship="Self.fk_CompraProd" FromRole="Producto" ToRole="CompraProdProv" />
           <NavigationProperty Name="DetalleVenta" Relationship="Self.fk_Producto" FromRole="Producto" ToRole="DetalleVenta" />
           <NavigationProperty Name="Marca" Relationship="Self.fk_Marca" FromRole="Producto" ToRole="Marca" />
+          <NavigationProperty Name="IdDetalleProvProds" Relationship="FerreteriaDBModel.fk_DetalleCompraProd" FromRole="Producto" ToRole="IdDetalleProvProd" />
         </EntityType>
         <EntityType Name="proveedores">
           <Key>
@@ -855,18 +859,6 @@
             </Principal>
             <Dependent Role="Producto">
               <PropertyRef Name="IdCategoria" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_CompraProd">
-          <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
-          <End Role="CompraProdProv" Type="Self.CompraProdProv" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Producto">
-              <PropertyRef Name="IdProducto" />
-            </Principal>
-            <Dependent Role="CompraProdProv">
-              <PropertyRef Name="IdProducto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1103,10 +1095,6 @@
             <End Role="Categoria" EntitySet="Categoria" />
             <End Role="Producto" EntitySet="Producto" />
           </AssociationSet>
-          <AssociationSet Name="fk_CompraProd" Association="Self.fk_CompraProd">
-            <End Role="Producto" EntitySet="Producto" />
-            <End Role="CompraProdProv" EntitySet="CompraProdProv" />
-          </AssociationSet>
           <AssociationSet Name="fk_CompraProv" Association="Self.fk_CompraProv">
             <End Role="proveedores" EntitySet="proveedores" />
             <End Role="CompraProdProv" EntitySet="CompraProdProv" />
@@ -1247,6 +1235,10 @@
           <FunctionImport Name="sp_DettalleRoles" ReturnType="Collection(FerreteriaDBModel.sp_DettalleRoles_Result)">
           <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
+          <AssociationSet Name="fk_DetalleCompraProd" Association="FerreteriaDBModel.fk_DetalleCompraProd">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="IdDetalleProvProd" EntitySet="IdDetalleProvProd" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1280,6 +1272,18 @@
           <Property Type="DateTime" Name="FechaMOD" Nullable="true" />
           <Property Type="Int32" Name="IdRoles" Nullable="true" />
         </ComplexType>
+        <Association Name="fk_DetalleCompraProd">
+          <End Type="FerreteriaDBModel.Producto" Role="Producto" Multiplicity="0..1" />
+          <End Type="FerreteriaDBModel.IdDetalleProvProd" Role="IdDetalleProvProd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="IdDetalleProvProd">
+              <PropertyRef Name="idProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1309,7 +1313,6 @@
                 <ScalarProperty Name="IdCompraProdProv" ColumnName="IdCompraProdProv" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="IdProveedores" ColumnName="IdProveedores" />
-                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1379,6 +1382,7 @@
           <EntitySetMapping Name="Factura">
             <EntityTypeMapping TypeName="FerreteriaDBModel.Factura">
               <MappingFragment StoreEntitySet="Factura">
+                <ScalarProperty Name="subtotal" ColumnName="subtotal" />
                 <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
                 <ScalarProperty Name="Total" ColumnName="Total" />
                 <ScalarProperty Name="Iva" ColumnName="Iva" />
@@ -1392,6 +1396,8 @@
           <EntitySetMapping Name="IdDetalleProvProd">
             <EntityTypeMapping TypeName="FerreteriaDBModel.IdDetalleProvProd">
               <MappingFragment StoreEntitySet="IdDetalleProvProd">
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="idProducto" ColumnName="idProducto" />
                 <ScalarProperty Name="IdDetalleProvProd1" ColumnName="IdDetalleProvProd" />
                 <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
                 <ScalarProperty Name="Precio" ColumnName="Precio" />

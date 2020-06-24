@@ -27,9 +27,7 @@
         <EntityTypeShape EntityType="FerreteriaDBModel.Ventas" Width="1.5" PointX="8.25" PointY="8.125" IsExpanded="true" />
         <AssociationConnector Association="FerreteriaDBModel.fk_Cargo" ManuallyRouted="false" />
         <AssociationConnector Association="FerreteriaDBModel.fk_Categoria" ManuallyRouted="false" />
-        <AssociationConnector Association="FerreteriaDBModel.fk_CompraProd" ManuallyRouted="false" />
-        <AssociationConnector Association="FerreteriaDBModel.fk_CompraProv" ManuallyRouted="false" />
-        <AssociationConnector Association="FerreteriaDBModel.fk_DetalleCompra" ManuallyRouted="false" />
+        <!--<AssociationConnector Association="FerreteriaDBModel.fk_DetalleCompra" ManuallyRouted="false" />-->
         <AssociationConnector Association="FerreteriaDBModel.fk_estado" ManuallyRouted="false" />
         <AssociationConnector Association="FerreteriaDBModel.fk_estadoemp" ManuallyRouted="false" />
         <AssociationConnector Association="FerreteriaDBModel.fk_estadoU" ManuallyRouted="false" />
@@ -45,6 +43,7 @@
         <AssociationConnector Association="FerreteriaDBModel.fk_Marca" ManuallyRouted="false" />
         <AssociationConnector Association="FerreteriaDBModel.FK__USUARIO_L__idPer__6383C8BA" ManuallyRouted="false" />
         <AssociationConnector Association="FerreteriaDBModel.fk_Persona" ManuallyRouted="false" />
+        <AssociationConnector Association="FerreteriaDBModel.fk_DetalleCompraProd" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

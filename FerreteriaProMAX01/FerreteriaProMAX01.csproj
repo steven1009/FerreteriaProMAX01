@@ -137,7 +137,6 @@
     <Compile Include="Controllers\Empleadoes1Controller.cs" />
     <Compile Include="Controllers\EmpleadoesController.cs" />
     <Compile Include="Controllers\EstadoesController.cs" />
-    <Compile Include="Controllers\FacturasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IdDetalleProvProdsController.cs" />
     <Compile Include="Controllers\MarcasController.cs" />
@@ -395,11 +394,6 @@
     <Content Include="Views\DetalleVentas\Edit.cshtml" />
     <Content Include="Views\DetalleVentas\Index.cshtml" />
     <Content Include="Views\DetalleVentas\DetailsVentas.cshtml" />
-    <Content Include="Views\Facturas\Create.cshtml" />
-    <Content Include="Views\Facturas\Delete.cshtml" />
-    <Content Include="Views\Facturas\Details.cshtml" />
-    <Content Include="Views\Facturas\Edit.cshtml" />
-    <Content Include="Views\Facturas\Index.cshtml" />
     <Content Include="Views\Empleadoes\Create.cshtml" />
     <Content Include="Views\Empleadoes\Delete.cshtml" />
     <Content Include="Views\Empleadoes\Details.cshtml" />
@@ -420,11 +414,6 @@
     <Content Include="Views\DetalleRoles\Details.cshtml" />
     <Content Include="Views\DetalleRoles\Edit.cshtml" />
     <Content Include="Views\DetalleRoles\Index.cshtml" />
-    <Content Include="Views\CompraProdProvs\Create.cshtml" />
-    <Content Include="Views\CompraProdProvs\Delete.cshtml" />
-    <Content Include="Views\CompraProdProvs\Details.cshtml" />
-    <Content Include="Views\CompraProdProvs\Edit.cshtml" />
-    <Content Include="Views\CompraProdProvs\Index.cshtml" />
     <Content Include="Views\DetalleEstadoUsuarios\Create.cshtml" />
     <Content Include="Views\DetalleEstadoUsuarios\Delete.cshtml" />
     <Content Include="Views\DetalleEstadoUsuarios\Details.cshtml" />
@@ -445,12 +434,21 @@
     <Content Include="Views\Marcas\Details.cshtml" />
     <Content Include="Views\Marcas\Edit.cshtml" />
     <Content Include="Views\Marcas\Index.cshtml" />
+    <Content Include="Views\Facturas\Create.cshtml" />
+    <Content Include="Views\Facturas\Delete.cshtml" />
+    <Content Include="Views\Facturas\Details.cshtml" />
+    <Content Include="Views\Facturas\Edit.cshtml" />
+    <Content Include="Views\Facturas\Index.cshtml" />
     <Content Include="Views\IdDetalleProvProds\Create.cshtml" />
     <Content Include="Views\IdDetalleProvProds\Delete.cshtml" />
     <Content Include="Views\IdDetalleProvProds\Details.cshtml" />
     <Content Include="Views\IdDetalleProvProds\Edit.cshtml" />
     <Content Include="Views\IdDetalleProvProds\Index.cshtml" />
-    <Content Include="Views\CompraProdProvs\CompraN.cshtml" />
+    <Content Include="Views\CompraProdProvs\Create.cshtml" />
+    <Content Include="Views\CompraProdProvs\Delete.cshtml" />
+    <Content Include="Views\CompraProdProvs\Details.cshtml" />
+    <Content Include="Views\CompraProdProvs\Edit.cshtml" />
+    <Content Include="Views\CompraProdProvs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

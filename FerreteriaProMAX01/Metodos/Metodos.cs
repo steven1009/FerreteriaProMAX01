@@ -70,7 +70,7 @@ namespace FerreteriaProMAX01.Metodos
             {
                 return r;
             }
-            r = (int)testCMD.ExecuteScalar();
+            r = (int) testCMD.ExecuteScalar();
             PubsConn.Close();
             return r;
         }
@@ -206,7 +206,7 @@ namespace FerreteriaProMAX01.Metodos
                 var persona = from item in dt.AsEnumerable()
                               select new DetalleVenta
                               {
-                                  IdDetalleV = Convert.ToInt32(item["IdDetall"]),
+                                  IdVenta = Convert.ToInt32(item["IdVenta"]),
                                   IdProducto = Convert.ToInt32(item["IdProducto"]),
                                   Cantidad = Convert.ToInt32(item["Cantidad"]),
                                   SubTOTAL = Convert.ToDecimal(item["SubTOTAL"]),

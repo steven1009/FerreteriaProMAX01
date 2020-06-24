@@ -450,6 +450,7 @@
     <Content Include="Views\IdDetalleProvProds\Details.cshtml" />
     <Content Include="Views\IdDetalleProvProds\Edit.cshtml" />
     <Content Include="Views\IdDetalleProvProds\Index.cshtml" />
+    <Content Include="Views\CompraProdProvs\CompraN.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

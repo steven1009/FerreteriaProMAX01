@@ -1,7 +1,9 @@
-﻿@model FerreteriaProMAX01.Models.Ventas
+﻿
 @{
-    ViewBag.Title = "VentaN";
+    ViewBag.Title = "View";
 }
+
+<h2>View</h2>
 
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/Js/alertify.min.js"></script>
@@ -48,7 +50,7 @@
             console.info(json);
 
             $.ajax({
-                url: "GuardarVenta",
+                url: "GuardarCompra",
                 data: JSON.stringify(json),
                 type: "POST",
                 async: false,//this makes the ajax-call blocking
@@ -169,15 +171,17 @@
             <td>
                 Modo de Pago
                 <div class="col-md-12 dropdown">
-                    @Html.DropDownList("idPago", null, "Seleccione Modo Pago", htmlAttributes: new { @class = "form-control", @required = "required"})
+                    @Html.DropDownList("idPago", null, "Seleccione Modo Pago", htmlAttributes: new { @class = "form-control", @required = "required" })
                     @*@Html.DropDownList("modoPago", ViewBag.ListaModoPago as SelectList, "Seleccione Modo Pago", htmlAttributes: new { @class = "form-control", @required = "required" })*@
                 </div>
             </td>
         </tr>
         <tr style="font-size:20px;">
 
-            <td>Nombre Cliente
-            <input style="font-size:20px; font-weight:700;" class="form-control" type="text" id="txtnombre" readonly required /></td>
+            <td>
+                Nombre Cliente
+                <input style="font-size:20px; font-weight:700;" class="form-control" type="text" id="txtnombre" readonly required />
+            </td>
             <td>
                 DNI
                 <input type="hidden" id="codigoCliente">

@@ -179,15 +179,15 @@ namespace FerreteriaProMAX01.Controllers
         }
         public ActionResult VentaN()
         {
-            Ventas ventas1 = db.Ventas.Find(m.ObtenerVentaT());
-            if (ventas1 == null)
-            {
-                ViewBag.idVenta = 1;
-            }
-            else
-            {
-                ViewBag.idVenta = (int)ventas1.IdVenta + 1;
-            }
+            //Ventas ventas1 = db.Ventas.Find(m.ObtenerVentaT());
+            //if (ventas1 == null)
+            //{
+            //    ViewBag.idVenta = 1;
+            //}
+            //else
+            //{
+            //    ViewBag.idVenta = (int)ventas1.IdVenta + 1;
+            //}
             ViewBag.IdEmpleado = Session["idempleado"];
             ViewBag.IdPago = new SelectList(db.TipoPago, "IdPago", "Nombre");
             ViewBag.IdProductoL = new SelectList(db.Producto, "IdProducto", "Nombre");
@@ -208,15 +208,15 @@ namespace FerreteriaProMAX01.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            Ventas ventas1 = db.Ventas.Find(m.ObtenerVentaT());
-            if (ventas1 == null)
-            {
-                ViewBag.idVenta = 1;
-            }
-            else
-            {
-                ViewBag.idVenta = (int)ventas1.IdVenta + 1;
-            }
+            //Ventas ventas1 = db.Ventas.Find(m.ObtenerVentaT());
+            //if (ventas1 == null)
+            //{
+            //    ViewBag.idVenta = 1;
+            //}
+            //else
+            //{
+            //    ViewBag.idVenta = (int)ventas1.IdVenta + 1;
+            //}
             ViewBag.IdEmpleado = Session["idempleado"];
             ViewBag.IdPago = new SelectList(db.TipoPago, "IdPago", "Nombre");
             ViewBag.IdProductoL = new SelectList(db.Producto, "IdProducto", "Nombre");
@@ -298,12 +298,11 @@ namespace FerreteriaProMAX01.Controllers
 
         //}
         [HttpPost]
-        public ActionResult GuardarVenta(DateTime fecha, string Cedula, string idEmpleado,  List<DetalleVenta> ListadoDetalle)
+        public ActionResult GuardarVenta(DateTime fecha, string Cedula, string idEmpleado, string idPago, string total1,  List<DetalleVenta> ListadoDetalle)
         {
             string mensaje = "";
             decimal iva = 0;
             int idVenta = 0;
-            int codigoCliente = 0;
             decimal total = 0;
 
             if (Cedula=="" || idEmpleado == "")
@@ -337,16 +336,19 @@ namespace FerreteriaProMAX01.Controllers
                 venta1.idEmpleado = Int32.Parse(idEmpleado);
                 db.Ventas.Add(venta1);
                 db.SaveChanges();
+                decimal tdescuento = (decimal) 0;
+                int indexv = m.ObtenerVentaT();
                 foreach (var data in ListadoDetalle)
                 {
                     int idProducto = Convert.ToInt32(data.IdProducto.ToString());
                     int cantidad = Convert.ToInt32(data.Cantidad.ToString());
                     decimal descuento = Convert.ToDecimal(data.Descuento.ToString());
+                    tdescuento = tdescuento + descuento;
                     decimal subtotal = Convert.ToDecimal(data.SubTOTAL.ToString());
                     iva = subtotal * (decimal) 0.15;
-                    total = subtotal - descuento - iva;
+                    total = subtotal - descuento + iva;
                     DetalleVenta detalleVenta= new DetalleVenta();
-                    detalleVenta.IdVenta = idVenta;
+                    detalleVenta.IdVenta = indexv;
                     detalleVenta.IdProducto = idProducto;
                     detalleVenta.Cantidad = cantidad;
                     detalleVenta.SubTOTAL = subtotal;
@@ -358,6 +360,16 @@ namespace FerreteriaProMAX01.Controllers
 
 
                 }
+                Factura factura = new Factura();
+                factura.IdPago = 1;
+                factura.idVenta = indexv;
+                factura.Fecha = fecha;
+                factura.Descuento = tdescuento;
+                factura.Iva = (Convert.ToDecimal(total1) - tdescuento) * (decimal)0.15;
+                factura.Total = (float)(Convert.ToDecimal(total1) + (Convert.ToDecimal(total1) - tdescuento) * (decimal)0.15);
+
+                db.Factura.Add(factura);
+                db.SaveChanges();
                 mensaje = "VENTA GUARDADA CON EXITO...";
             }
             return Json(mensaje);

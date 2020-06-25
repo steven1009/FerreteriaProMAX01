@@ -5,28 +5,26 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="d247a7e84de842e48fda975d1d104bfb" Name="Diagram1">
-        <EntityTypeShape EntityType="FerreteriaDBModel.Cargo" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="FerreteriaDBModel.Categoria" Width="1.5" PointX="6" PointY="2" IsExpanded="true" />
-        <EntityTypeShape EntityType="FerreteriaDBModel.CompraProdProv" Width="1.5" PointX="10.5" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="FerreteriaDBModel.DetalleEstado" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="FerreteriaDBModel.DetalleEstadoUsuario" Width="1.5" PointX="5.25" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="FerreteriaDBModel.DetalleRoles" Width="1.5" PointX="5.25" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="FerreteriaDBModel.DetalleVenta" Width="1.5" PointX="10.5" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="FerreteriaDBModel.Empleado" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="FerreteriaDBModel.Estado" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FerreteriaDBModel.Cargo" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FerreteriaDBModel.Categoria" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FerreteriaDBModel.CompraProdProv" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FerreteriaDBModel.DetalleEstado" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FerreteriaDBModel.DetalleEstadoUsuario" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FerreteriaDBModel.DetalleRoles" Width="1.5" PointX="5.25" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FerreteriaDBModel.DetalleVenta" Width="1.5" PointX="10.5" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="FerreteriaDBModel.Empleado" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FerreteriaDBModel.Estado" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="FerreteriaDBModel.Factura" Width="1.5" PointX="13.5" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="FerreteriaDBModel.IdDetalleProvProd" Width="1.5" PointX="12.75" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="FerreteriaDBModel.Marca" Width="1.5" PointX="6" PointY="14.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="FerreteriaDBModel.Persona" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="FerreteriaDBModel.Producto" Width="1.5" PointX="8.25" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="FerreteriaDBModel.proveedores" Width="1.5" PointX="8.25" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="FerreteriaDBModel.Roles" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FerreteriaDBModel.sysdiagrams" Width="1.5" PointX="8.75" PointY="11.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FerreteriaDBModel.TipoPago" Width="1.5" PointX="11.25" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="FerreteriaDBModel.USUARIO_LOGIN" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="FerreteriaDBModel.Ventas" Width="1.5" PointX="8.25" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FerreteriaDBModel.IdDetalleProvProd" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="FerreteriaDBModel.Marca" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FerreteriaDBModel.Persona" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FerreteriaDBModel.proveedores" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FerreteriaDBModel.Roles" Width="1.5" PointX="3" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FerreteriaDBModel.sysdiagrams" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FerreteriaDBModel.TipoPago" Width="1.5" PointX="11.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FerreteriaDBModel.USUARIO_LOGIN" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FerreteriaDBModel.Ventas" Width="1.5" PointX="8.25" PointY="8.25" IsExpanded="true" />
         <AssociationConnector Association="FerreteriaDBModel.fk_Cargo" ManuallyRouted="false" />
-        <AssociationConnector Association="FerreteriaDBModel.fk_Categoria" ManuallyRouted="false" />
 		<AssociationConnector Association="FerreteriaDBModel.fk_CompraProv" ManuallyRouted="false" />
         <AssociationConnector Association="FerreteriaDBModel.fk_DetalleCompra" ManuallyRouted="false" />
         <AssociationConnector Association="FerreteriaDBModel.fk_estado" ManuallyRouted="false" />
@@ -35,16 +33,18 @@
         <AssociationConnector Association="FerreteriaDBModel.fk_estadoUsuario" ManuallyRouted="false" />
         <AssociationConnector Association="FerreteriaDBModel.fk_Roles" ManuallyRouted="false" />
         <AssociationConnector Association="FerreteriaDBModel.fk_RolesU" ManuallyRouted="false" />
-        <AssociationConnector Association="FerreteriaDBModel.fk_Producto" ManuallyRouted="false" />
         <AssociationConnector Association="FerreteriaDBModel.fk_Venta" ManuallyRouted="false" />
         <AssociationConnector Association="FerreteriaDBModel.fk_PersonaE" ManuallyRouted="false" />
         <AssociationConnector Association="FerreteriaDBModel.fk_Vendedor" ManuallyRouted="false" />
         <AssociationConnector Association="FerreteriaDBModel.FK__Factura__idVenta__5812160E" ManuallyRouted="false" />
         <AssociationConnector Association="FerreteriaDBModel.fk_TipoPago" ManuallyRouted="false" />
-        <AssociationConnector Association="FerreteriaDBModel.fk_Marca" ManuallyRouted="false" />
         <AssociationConnector Association="FerreteriaDBModel.FK__USUARIO_L__idPer__6383C8BA" ManuallyRouted="false" />
         <AssociationConnector Association="FerreteriaDBModel.fk_Persona" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="FerreteriaDBModel.Producto" Width="1.5" PointX="12" PointY="0.75" />
+        <AssociationConnector Association="FerreteriaDBModel.fk_Categoria" />
+        <AssociationConnector Association="FerreteriaDBModel.fk_Producto" />
         <AssociationConnector Association="FerreteriaDBModel.fk_DetalleCompraProd" />
+        <AssociationConnector Association="FerreteriaDBModel.fk_Marca" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

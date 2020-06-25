@@ -631,7 +631,7 @@
           <Property Name="IdCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Producto" Relationship="Self.fk_Categoria" FromRole="Categoria" ToRole="Producto" />
+          <NavigationProperty Name="Producto" Relationship="FerreteriaDBModel.fk_Categoria" FromRole="Categoria" ToRole="Producto" />
         </EntityType>
         <EntityType Name="CompraProdProv">
           <Key>
@@ -690,8 +690,8 @@
           <Property Name="Descuento" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="Iva" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="Total" Type="Decimal" Precision="19" Scale="4" />
-          <NavigationProperty Name="Producto" Relationship="Self.fk_Producto" FromRole="DetalleVenta" ToRole="Producto" />
           <NavigationProperty Name="Ventas" Relationship="Self.fk_Venta" FromRole="DetalleVenta" ToRole="Ventas" />
+          <NavigationProperty Name="Producto" Relationship="FerreteriaDBModel.fk_Producto" FromRole="DetalleVenta" ToRole="Producto" />
         </EntityType>
         <EntityType Name="Empleado">
           <Key>
@@ -748,7 +748,7 @@
           </Key>
           <Property Name="IdMarca" Type="Int32" Nullable="false" />
           <Property Name="Nombre" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Producto" Relationship="Self.fk_Marca" FromRole="Marca" ToRole="Producto" />
+          <NavigationProperty Name="Producto" Relationship="FerreteriaDBModel.fk_Marca" FromRole="Marca" ToRole="Producto" />
         </EntityType>
         <EntityType Name="Persona">
           <Key>
@@ -768,20 +768,6 @@
           <NavigationProperty Name="Empleado" Relationship="Self.fk_PersonaE" FromRole="Persona" ToRole="Empleado" />
           <NavigationProperty Name="USUARIO_LOGIN" Relationship="Self.FK__USUARIO_L__idPer__6383C8BA" FromRole="Persona" ToRole="USUARIO_LOGIN" />
           <NavigationProperty Name="Ventas" Relationship="Self.fk_Persona" FromRole="Persona" ToRole="Ventas" />
-        </EntityType>
-        <EntityType Name="Producto">
-          <Key>
-            <PropertyRef Name="IdProducto" />
-          </Key>
-          <Property Name="IdProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Stok" Type="Int32" />
-          <Property Name="IdCategoria" Type="Int32" />
-          <Property Name="IdMarca" Type="Int32" />
-          <NavigationProperty Name="Categoria" Relationship="Self.fk_Categoria" FromRole="Producto" ToRole="Categoria" />
-          <NavigationProperty Name="DetalleVenta" Relationship="Self.fk_Producto" FromRole="Producto" ToRole="DetalleVenta" />
-          <NavigationProperty Name="Marca" Relationship="Self.fk_Marca" FromRole="Producto" ToRole="Marca" />
-          <NavigationProperty Name="IdDetalleProvProds" Relationship="FerreteriaDBModel.fk_DetalleCompraProd" FromRole="Producto" ToRole="IdDetalleProvProd" />
         </EntityType>
         <EntityType Name="proveedores">
           <Key>
@@ -853,18 +839,6 @@
             </Principal>
             <Dependent Role="Empleado">
               <PropertyRef Name="IdCargo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_Categoria">
-          <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
-          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Categoria">
-              <PropertyRef Name="IdCategoria" />
-            </Principal>
-            <Dependent Role="Producto">
-              <PropertyRef Name="IdCategoria" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -964,18 +938,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_Producto">
-          <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
-          <End Role="DetalleVenta" Type="Self.DetalleVenta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Producto">
-              <PropertyRef Name="IdProducto" />
-            </Principal>
-            <Dependent Role="DetalleVenta">
-              <PropertyRef Name="IdProducto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_Venta">
           <End Role="Ventas" Type="Self.Ventas" Multiplicity="0..1" />
           <End Role="DetalleVenta" Type="Self.DetalleVenta" Multiplicity="*" />
@@ -1036,18 +998,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_Marca">
-          <End Role="Marca" Type="Self.Marca" Multiplicity="0..1" />
-          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Marca">
-              <PropertyRef Name="IdMarca" />
-            </Principal>
-            <Dependent Role="Producto">
-              <PropertyRef Name="IdMarca" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__USUARIO_L__idPer__6383C8BA">
           <End Role="Persona" Type="Self.Persona" Multiplicity="0..1" />
           <End Role="USUARIO_LOGIN" Type="Self.USUARIO_LOGIN" Multiplicity="*" />
@@ -1086,7 +1036,6 @@
           <EntitySet Name="IdDetalleProvProd" EntityType="Self.IdDetalleProvProd" />
           <EntitySet Name="Marca" EntityType="Self.Marca" />
           <EntitySet Name="Persona" EntityType="Self.Persona" />
-          <EntitySet Name="Producto" EntityType="Self.Producto" />
           <EntitySet Name="proveedores" EntityType="Self.proveedores" />
           <EntitySet Name="Roles" EntityType="Self.Roles" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
@@ -1096,10 +1045,6 @@
           <AssociationSet Name="fk_Cargo" Association="Self.fk_Cargo">
             <End Role="Cargo" EntitySet="Cargo" />
             <End Role="Empleado" EntitySet="Empleado" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Categoria" Association="Self.fk_Categoria">
-            <End Role="Categoria" EntitySet="Categoria" />
-            <End Role="Producto" EntitySet="Producto" />
           </AssociationSet>
           <AssociationSet Name="fk_CompraProv" Association="Self.fk_CompraProv">
             <End Role="proveedores" EntitySet="proveedores" />
@@ -1133,10 +1078,6 @@
             <End Role="Roles" EntitySet="Roles" />
             <End Role="DetalleRoles" EntitySet="DetalleRoles" />
           </AssociationSet>
-          <AssociationSet Name="fk_Producto" Association="Self.fk_Producto">
-            <End Role="Producto" EntitySet="Producto" />
-            <End Role="DetalleVenta" EntitySet="DetalleVenta" />
-          </AssociationSet>
           <AssociationSet Name="fk_Venta" Association="Self.fk_Venta">
             <End Role="Ventas" EntitySet="Ventas" />
             <End Role="DetalleVenta" EntitySet="DetalleVenta" />
@@ -1156,10 +1097,6 @@
           <AssociationSet Name="fk_TipoPago" Association="Self.fk_TipoPago">
             <End Role="TipoPago" EntitySet="TipoPago" />
             <End Role="Factura" EntitySet="Factura" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Marca" Association="Self.fk_Marca">
-            <End Role="Marca" EntitySet="Marca" />
-            <End Role="Producto" EntitySet="Producto" />
           </AssociationSet>
           <AssociationSet Name="FK__USUARIO_L__idPer__6383C8BA" Association="Self.FK__USUARIO_L__idPer__6383C8BA">
             <End Role="Persona" EntitySet="Persona" />
@@ -1241,10 +1178,6 @@
           <FunctionImport Name="sp_DettalleRoles" ReturnType="Collection(FerreteriaDBModel.sp_DettalleRoles_Result)">
           <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
-          <AssociationSet Name="fk_DetalleCompraProd" Association="FerreteriaDBModel.fk_DetalleCompraProd">
-            <End Role="Producto" EntitySet="Producto" />
-            <End Role="IdDetalleProvProd" EntitySet="IdDetalleProvProd" />
-          </AssociationSet>
           <FunctionImport Name="BuscarProveedor" ReturnType="Collection(FerreteriaDBModel.BuscarProveedor_Result)">
           <Parameter Name="nombre" Mode="In" Type="String" />
           </FunctionImport>
@@ -1252,6 +1185,23 @@
           <Parameter Name="nombre" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="ObtenerCompra" ReturnType="Collection(Int32)" />
+          <EntitySet Name="Producto" EntityType="FerreteriaDBModel.Producto" />
+          <AssociationSet Name="fk_Categoria" Association="FerreteriaDBModel.fk_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Producto" Association="FerreteriaDBModel.fk_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="DetalleVenta" EntitySet="DetalleVenta" />
+          </AssociationSet>
+          <AssociationSet Name="fk_DetalleCompraProd" Association="FerreteriaDBModel.fk_DetalleCompraProd">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="IdDetalleProvProd" EntitySet="IdDetalleProvProd" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Marca" Association="FerreteriaDBModel.fk_Marca">
+            <End Role="Marca" EntitySet="Marca" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1285,6 +1235,49 @@
           <Property Type="DateTime" Name="FechaMOD" Nullable="true" />
           <Property Type="Int32" Name="IdRoles" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="BuscarProveedor_Result">
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="80" />
+          <Property Type="String" Name="TipoProveedor" Nullable="true" MaxLength="80" />
+        </ComplexType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Stok" Type="Int32" />
+          <Property Name="IdCategoria" Type="Int32" />
+          <Property Name="IdMarca" Type="Int32" />
+          <Property Name="PrecioU" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Categoria" Relationship="FerreteriaDBModel.fk_Categoria" FromRole="Producto" ToRole="Categoria" />
+          <NavigationProperty Name="DetalleVenta" Relationship="FerreteriaDBModel.fk_Producto" FromRole="Producto" ToRole="DetalleVenta" />
+          <NavigationProperty Name="IdDetalleProvProd" Relationship="FerreteriaDBModel.fk_DetalleCompraProd" FromRole="Producto" ToRole="IdDetalleProvProd" />
+          <NavigationProperty Name="Marca" Relationship="FerreteriaDBModel.fk_Marca" FromRole="Producto" ToRole="Marca" />
+        </EntityType>
+        <Association Name="fk_Categoria">
+          <End Type="FerreteriaDBModel.Categoria" Role="Categoria" Multiplicity="0..1" />
+          <End Type="FerreteriaDBModel.Producto" Role="Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="IdCategoria" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Producto">
+          <End Type="FerreteriaDBModel.Producto" Role="Producto" Multiplicity="0..1" />
+          <End Type="FerreteriaDBModel.DetalleVenta" Role="DetalleVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="DetalleVenta">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_DetalleCompraProd">
           <End Type="FerreteriaDBModel.Producto" Role="Producto" Multiplicity="0..1" />
           <End Type="FerreteriaDBModel.IdDetalleProvProd" Role="IdDetalleProvProd" Multiplicity="*" />
@@ -1297,10 +1290,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="BuscarProveedor_Result">
-          <Property Type="String" Name="nombre" Nullable="false" MaxLength="80" />
-          <Property Type="String" Name="TipoProveedor" Nullable="true" MaxLength="80" />
-        </ComplexType>
+        <Association Name="fk_Marca">
+          <End Type="FerreteriaDBModel.Marca" Role="Marca" Multiplicity="0..1" />
+          <End Type="FerreteriaDBModel.Producto" Role="Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marca">
+              <PropertyRef Name="IdMarca" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="IdMarca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1447,17 +1448,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Producto">
-            <EntityTypeMapping TypeName="FerreteriaDBModel.Producto">
-              <MappingFragment StoreEntitySet="Producto">
-                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Stok" ColumnName="Stok" />
-                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
-                <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="proveedores">
             <EntityTypeMapping TypeName="FerreteriaDBModel.proveedores">
               <MappingFragment StoreEntitySet="proveedores">
@@ -1592,6 +1582,18 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="BuscarProveedorId" FunctionName="FerreteriaDBModel.Store.BuscarProveedorId" />
           <FunctionImportMapping FunctionImportName="ObtenerCompra" FunctionName="FerreteriaDBModel.Store.ObtenerCompra" />
+          <EntitySetMapping Name="Producto">
+            <EntityTypeMapping TypeName="FerreteriaDBModel.Producto">
+              <MappingFragment StoreEntitySet="Producto">
+                <ScalarProperty Name="PrecioU" ColumnName="PrecioU" />
+                <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="Stok" ColumnName="Stok" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1606,7 +1608,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />

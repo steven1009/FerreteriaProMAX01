@@ -40,13 +40,13 @@ namespace FerreteriaProMAX01.Models
         public virtual DbSet<IdDetalleProvProd> IdDetalleProvProd { get; set; }
         public virtual DbSet<Marca> Marca { get; set; }
         public virtual DbSet<Persona> Persona { get; set; }
-        public virtual DbSet<Producto> Producto { get; set; }
         public virtual DbSet<proveedores> proveedores { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TipoPago> TipoPago { get; set; }
         public virtual DbSet<USUARIO_LOGIN> USUARIO_LOGIN { get; set; }
         public virtual DbSet<Ventas> Ventas { get; set; }
+        public virtual DbSet<Producto> Producto { get; set; }
     
         public virtual ObjectResult<Nullable<int>> BuscarApellido(string apellido)
         {

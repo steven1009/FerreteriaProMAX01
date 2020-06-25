@@ -18,7 +18,7 @@ namespace FerreteriaProMAX01.Models
         public Producto()
         {
             this.DetalleVenta = new HashSet<DetalleVenta>();
-            this.IdDetalleProvProds = new HashSet<IdDetalleProvProd>();
+            this.IdDetalleProvProd = new HashSet<IdDetalleProvProd>();
         }
     
         public int IdProducto { get; set; }
@@ -26,13 +26,13 @@ namespace FerreteriaProMAX01.Models
         public Nullable<int> Stok { get; set; }
         public Nullable<int> IdCategoria { get; set; }
         public Nullable<int> IdMarca { get; set; }
-        public Nullable<Decimal> PrecioU { get; set; }
-
+        public Nullable<decimal> PrecioU { get; set; }
+    
         public virtual Categoria Categoria { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetalleVenta> DetalleVenta { get; set; }
-        public virtual Marca Marca { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<IdDetalleProvProd> IdDetalleProvProds { get; set; }
+        public virtual ICollection<IdDetalleProvProd> IdDetalleProvProd { get; set; }
+        public virtual Marca Marca { get; set; }
     }
 }

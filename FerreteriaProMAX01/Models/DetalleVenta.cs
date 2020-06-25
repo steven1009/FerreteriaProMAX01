@@ -23,7 +23,7 @@ namespace FerreteriaProMAX01.Models
         public Nullable<decimal> Iva { get; set; }
         public Nullable<decimal> Total { get; set; }
     
-        public virtual Producto Producto { get; set; }
         public virtual Ventas Ventas { get; set; }
+        public virtual Producto Producto { get; set; }
     }
 }

@@ -45,7 +45,7 @@ namespace FerreteriaProMAX01.Controllers
         }
 
         // POST: CompraProdProvs/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -79,7 +79,7 @@ namespace FerreteriaProMAX01.Controllers
         }
 
         // POST: CompraProdProvs/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -187,6 +187,7 @@ namespace FerreteriaProMAX01.Controllers
             Producto producto = new Producto();
             producto.IdProducto = p.IdProducto;
             producto.Nombre = p.Nombre;
+            producto.PrecioU =  p.PrecioU*100/140;
             //db.Producto.Find(1);
             return Json(producto, JsonRequestBehavior.AllowGet);
         }
@@ -220,7 +221,7 @@ namespace FerreteriaProMAX01.Controllers
                 }
                 //codigoPago = Convert.ToInt32(modoPago);
                 proveedores proveedores = db.proveedores.Find(m.BuscarProv(Nombre));
-                
+
 
                 //REGISTRO DE VENTA
                 CompraProdProv compra1 = new CompraProdProv();

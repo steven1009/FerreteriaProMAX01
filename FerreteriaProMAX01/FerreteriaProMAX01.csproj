@@ -388,11 +388,6 @@
     <Content Include="Views\TipoPagoes\Details.cshtml" />
     <Content Include="Views\TipoPagoes\Edit.cshtml" />
     <Content Include="Views\TipoPagoes\Index.cshtml" />
-    <Content Include="Views\Productoes\Create.cshtml" />
-    <Content Include="Views\Productoes\Delete.cshtml" />
-    <Content Include="Views\Productoes\Details.cshtml" />
-    <Content Include="Views\Productoes\Edit.cshtml" />
-    <Content Include="Views\Productoes\Index.cshtml" />
     <Content Include="Views\DetalleVentas\Create.cshtml" />
     <Content Include="Views\DetalleVentas\Delete.cshtml" />
     <Content Include="Views\DetalleVentas\Details.cshtml" />
@@ -439,11 +434,6 @@
     <Content Include="Views\Marcas\Details.cshtml" />
     <Content Include="Views\Marcas\Edit.cshtml" />
     <Content Include="Views\Marcas\Index.cshtml" />
-    <Content Include="Views\Facturas\Create.cshtml" />
-    <Content Include="Views\Facturas\Delete.cshtml" />
-    <Content Include="Views\Facturas\Details.cshtml" />
-    <Content Include="Views\Facturas\Edit.cshtml" />
-    <Content Include="Views\Facturas\Index.cshtml" />
     <Content Include="Views\IdDetalleProvProds\Create.cshtml" />
     <Content Include="Views\IdDetalleProvProds\Delete.cshtml" />
     <Content Include="Views\IdDetalleProvProds\Details.cshtml" />
@@ -461,6 +451,16 @@
     <Content Include="Views\proveedores\Details.cshtml" />
     <Content Include="Views\proveedores\Edit.cshtml" />
     <Content Include="Views\proveedores\Index.cshtml" />
+    <Content Include="Views\Facturas\Create.cshtml" />
+    <Content Include="Views\Facturas\Delete.cshtml" />
+    <Content Include="Views\Facturas\Details.cshtml" />
+    <Content Include="Views\Facturas\Edit.cshtml" />
+    <Content Include="Views\Facturas\Index.cshtml" />
+    <Content Include="Views\Productoes\Create.cshtml" />
+    <Content Include="Views\Productoes\Delete.cshtml" />
+    <Content Include="Views\Productoes\Details.cshtml" />
+    <Content Include="Views\Productoes\Edit.cshtml" />
+    <Content Include="Views\Productoes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

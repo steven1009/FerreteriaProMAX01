@@ -91,7 +91,7 @@
         var des = 0;
         y = $("#cantidad").val();
         x = $("#precio").val();
-        subtotal=(x*y);
+        subtotal=(x*y)-des;
         cadena = cadena + "<td>" + subtotal + "</td>"
         cadena=cadena+"<td><a class ='elimina'><button class='btn btn-danger' type='button'><span class='fa fa-remove'></span></button></a></td>";
         $("#detalle tbody").append(cadena);
@@ -200,7 +200,7 @@
         <tr style="font-size:20px;">
             <td>Nombre del Producto <input style="font-size:20px; font-weight:700;" class="form-control" type="text" id="nombreproducto" readonly required /></td>
             <td>Id <input style="font-size:20px; font-weight:700;" type="text" id="idproducto" class="form-control" readonly required /></td>
-            <td>Precio <input style="font-size:20px; font-weight:700;" type="text" id="precio" class="form-control" onfocus="this.value = '';" required /></td>
+            <td>Precio <input style="font-size:20px; font-weight:700;" id="precio" type="number" class="form-control" onfocus="this.value = '';" required /></td>
             <td>Cantidad <input style="font-size:20px; font-weight:700;" class="form-control" type="number" id="cantidad" value="Ingrese Cantidad" onfocus="this.value = '';" required /></td>
             <td colspan="2"><input class="btn btn-primary btn-lg" type="submit" name="agregar" id="agregar" value="Agregar" /></td>
         </tr>
@@ -260,7 +260,7 @@
                         //recibir datos json
                         $("#idproducto").val(item.IdProducto);
                         $("#nombreproducto").val(item.Nombre);
-                        $("#precio").val(item.Nombre);
+                        $("#precio").val(item.PrecioU);
                     });
                 }
             });

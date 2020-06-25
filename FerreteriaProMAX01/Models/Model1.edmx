@@ -138,10 +138,10 @@
           </Key>
           <Property Name="IdProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="60" Nullable="false" />
-          <Property Name="PrecioU" Type="nvarchar" MaxLength="256" />
           <Property Name="Stok" Type="int" />
           <Property Name="IdCategoria" Type="int" />
           <Property Name="IdMarca" Type="int" />
+          <Property Name="PrecioU" Type="money" />
         </EntityType>
         <EntityType Name="proveedores">
           <Key>
@@ -775,7 +775,6 @@
           </Key>
           <Property Name="IdProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PrecioU" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Stok" Type="Int32" />
           <Property Name="IdCategoria" Type="Int32" />
           <Property Name="IdMarca" Type="Int32" />
@@ -1453,7 +1452,6 @@
               <MappingFragment StoreEntitySet="Producto">
                 <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="PrecioU" ColumnName="PrecioU" />
                 <ScalarProperty Name="Stok" ColumnName="Stok" />
                 <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
                 <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />

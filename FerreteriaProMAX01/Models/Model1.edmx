@@ -458,6 +458,12 @@
         <Function Name="BuscarProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nombre" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="BuscarProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombre" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="BuscarProveedorId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombre" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="BuscarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="usuario" Type="nvarchar" Mode="In" />
         </Function>
@@ -465,6 +471,7 @@
           <Parameter Name="idVenta" Type="int" Mode="In" />
         </Function>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="ObtenerCompra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ObtenerVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -1239,6 +1246,13 @@
             <End Role="Producto" EntitySet="Producto" />
             <End Role="IdDetalleProvProd" EntitySet="IdDetalleProvProd" />
           </AssociationSet>
+          <FunctionImport Name="BuscarProveedor" ReturnType="Collection(FerreteriaDBModel.BuscarProveedor_Result)">
+          <Parameter Name="nombre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="BuscarProveedorId" ReturnType="Collection(Int32)">
+          <Parameter Name="nombre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ObtenerCompra" ReturnType="Collection(Int32)" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1284,6 +1298,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="BuscarProveedor_Result">
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="80" />
+          <Property Type="String" Name="TipoProveedor" Nullable="true" MaxLength="80" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1566,6 +1584,16 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="BuscarProveedor" FunctionName="FerreteriaDBModel.Store.BuscarProveedor">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FerreteriaDBModel.BuscarProveedor_Result">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="TipoProveedor" ColumnName="TipoProveedor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="BuscarProveedorId" FunctionName="FerreteriaDBModel.Store.BuscarProveedorId" />
+          <FunctionImportMapping FunctionImportName="ObtenerCompra" FunctionName="FerreteriaDBModel.Store.ObtenerCompra" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

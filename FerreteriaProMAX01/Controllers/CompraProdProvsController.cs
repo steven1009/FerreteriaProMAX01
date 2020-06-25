@@ -231,12 +231,16 @@ namespace FerreteriaProMAX01.Controllers
                 int indexv = m.ObtenerCompraT();
                 foreach (var data in ListadoCompra)
                 {
-                    int cantidad = Convert.ToInt32(data.Cantidad.ToString());
-                    decimal precio = Convert.ToDecimal(data.Precio.ToString());
-                    total = cantidad * precio;
+                    int idProducto = Convert.ToInt32(data.idProducto.ToString());
+                    int Cantidad = Convert.ToInt32(data.Cantidad.ToString());
+                    decimal Precio = Convert.ToDecimal(data.Precio.ToString());
+                    total = Convert.ToDecimal(data.total.ToString());
                     IdDetalleProvProd compradetalle = new IdDetalleProvProd();
-                    compradetalle.Cantidad = cantidad;
+                    compradetalle.Cantidad = Cantidad;
                     compradetalle.total = total;
+                    compradetalle.Precio = Precio;
+                    compradetalle.idProducto = idProducto;
+                    compradetalle.IdCompraProdProv = indexv;
                     db.IdDetalleProvProd.Add(compradetalle);
                     db.SaveChanges();
 

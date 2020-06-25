@@ -280,5 +280,28 @@ namespace FerreteriaProMAX01.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_DettalleRoles_Result>("sp_DettalleRoles", idUsuarioParameter);
         }
+    
+        public virtual ObjectResult<BuscarProveedor_Result> BuscarProveedor(string nombre)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BuscarProveedor_Result>("BuscarProveedor", nombreParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> BuscarProveedorId(string nombre)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("BuscarProveedorId", nombreParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> ObtenerCompra()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("ObtenerCompra");
+        }
     }
 }

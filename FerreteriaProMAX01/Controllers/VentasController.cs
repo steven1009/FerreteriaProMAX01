@@ -344,9 +344,9 @@ namespace FerreteriaProMAX01.Controllers
                     int cantidad = Convert.ToInt32(data.Cantidad.ToString());
                     decimal descuento = Convert.ToDecimal(data.Descuento.ToString());
                     tdescuento = tdescuento + descuento;
-                    decimal subtotal = Convert.ToDecimal(data.SubTOTAL.ToString());
-                    iva = subtotal * (decimal) 0.15;
-                    total = subtotal - descuento + iva;
+                    decimal subtotal = Convert.ToDecimal(data.SubTOTAL.ToString())+ descuento;
+                    iva = (subtotal- descuento) * (decimal) 0.15;
+                    total = subtotal + iva;
                     DetalleVenta detalleVenta= new DetalleVenta();
                     detalleVenta.IdVenta = indexv;
                     detalleVenta.IdProducto = idProducto;

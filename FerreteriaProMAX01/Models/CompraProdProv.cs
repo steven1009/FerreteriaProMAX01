@@ -25,7 +25,7 @@ namespace FerreteriaProMAX01.Models
         public Nullable<int> IdProveedores { get; set; }
     
         public virtual proveedores proveedores { get; set; }
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IdDetalleProvProd> IdDetalleProvProd { get; set; }
     }
 }

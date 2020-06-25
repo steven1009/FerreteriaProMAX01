@@ -32,11 +32,13 @@
                 if (i == 0) {
                     envio += "ListadoCompra:[{IdProducto:'" + $(this).find('td').eq(0).text() +
                         "',Cantidad:'" + $(this).find('td').eq(2).text() +
-                        "',Precio:'" + $(this).find('td').eq(3).text() + "'}"
+                        "',Precio:'" + $(this).find('td').eq(3).text() +
+                        "',total:'" + $(this).find('td').eq(4).text() + "'}"
                 } else {
                     envio += ",{IdProducto:'" + $(this).find('td').eq(0).text() +
                         "',Cantidad:'" + $(this).find('td').eq(2).text() +
-                        "',Precio:'" + $(this).find('td').eq(4).text() + "'}"
+                        "',Precio:'" + $(this).find('td').eq(3).text() +
+                        "',total:'" + $(this).find('td').eq(4).text() +"'}"
                 }
                 i = 1;
             });

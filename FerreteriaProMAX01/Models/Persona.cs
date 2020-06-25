@@ -11,7 +11,8 @@ namespace FerreteriaProMAX01.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Persona
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,12 +25,16 @@ namespace FerreteriaProMAX01.Models
     
         public int idPersona { get; set; }
         public int Codigo { get; set; }
+
         public string Cedula { get; set; }
+        
         public string nombre { get; set; }
+        [StringLength(20, ErrorMessage = "El titulo no debe ser mayor a 10 caracteres")]
         public string Primer_Apellido { get; set; }
         public string Segund_Apellido { get; set; }
         public Nullable<System.DateTime> Fecha_nacimiento { get; set; }
         public string Telefono { get; set; }
+        [StringLength(8, ErrorMessage = "El titulo no debe ser mayor a 10 caracteres")]
         public string Correo { get; set; }
         public string Sexo { get; set; }
         public string Direccion { get; set; }

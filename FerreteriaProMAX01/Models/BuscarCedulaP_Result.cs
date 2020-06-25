@@ -10,10 +10,12 @@
 namespace FerreteriaProMAX01.Models
 {
     using System;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class BuscarCedulaP_Result
     {
         public string Cedula { get; set; }
+       
         public string nombre { get; set; }
         public string Primer_Apellido { get; set; }
         public int Codigo { get; set; }

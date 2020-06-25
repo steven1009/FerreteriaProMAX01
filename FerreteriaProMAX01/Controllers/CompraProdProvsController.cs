@@ -13,6 +13,7 @@ namespace FerreteriaProMAX01.Controllers
     public class CompraProdProvsController : Controller
     {
         private FerreteriaDBEntities db = new FerreteriaDBEntities();
+        Metodos.Metodos m = new Metodos.Metodos();
 
         // GET: CompraProdProvs
         public ActionResult Index()
@@ -186,7 +187,6 @@ namespace FerreteriaProMAX01.Controllers
             Producto producto = new Producto();
             producto.IdProducto = p.IdProducto;
             producto.Nombre = p.Nombre;
-            producto.PrecioU = p.PrecioU;
             //db.Producto.Find(1);
             return Json(producto, JsonRequestBehavior.AllowGet);
         }
@@ -197,10 +197,9 @@ namespace FerreteriaProMAX01.Controllers
 
         //}
         [HttpPost]
-        public ActionResult GuardarCompra(DateTime Fecha, string Nombre, string idEmpleado, string total1, List<IdDetalleProvProd> ListadoCompra)
+        public ActionResult GuardarCompra(DateTime Fecha, string Nombre, string idEmpleado, List<IdDetalleProvProd> ListadoCompra)
         {
             string mensaje = "";
-            decimal iva = 0;
             int idCompra = 0;
             decimal total = 0;
 
@@ -229,30 +228,21 @@ namespace FerreteriaProMAX01.Controllers
                 compra1.IdProveedores = proveedores.IdProveedores;
                 db.CompraProdProv.Add(compra1);
                 db.SaveChanges();
-                decimal tdescuento = (decimal) 0;
                 int indexv = m.ObtenerCompraT();
                 foreach (var data in ListadoCompra)
                 {
                     int cantidad = Convert.ToInt32(data.Cantidad.ToString());
-                    decimal descuento = Convert.ToDecimal(data.Descuento.ToString());
-                    tdescuento = tdescuento + descuento;
-                    decimal subtotal = Convert.ToDecimal(data.SubTOTAL.ToString());
-                    iva = subtotal * (decimal)0.15;
-                    total = subtotal - descuento + iva;
+                    decimal precio = Convert.ToDecimal(data.Precio.ToString());
+                    total = cantidad * precio;
                     IdDetalleProvProd compradetalle = new IdDetalleProvProd();
-                    compradetalle.IdVenta = indexv;
-                    compradetalle.IdProducto = idProducto;
                     compradetalle.Cantidad = cantidad;
-                    compradetalle.SubTOTAL = subtotal;
-                    compradetalle.Descuento = descuento;
-                    compradetalle.Iva = iva;
-                    compradetalle.Total = total;
+                    compradetalle.total = total;
                     db.IdDetalleProvProd.Add(compradetalle);
                     db.SaveChanges();
 
 
                 }
-                mensaje = "VENTA GUARDADA CON EXITO...";
+                mensaje = "COMPRA GUARDADA CON EXITO...";
             }
             return Json(mensaje);
 

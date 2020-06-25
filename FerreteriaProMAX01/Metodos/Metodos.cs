@@ -74,6 +74,22 @@ namespace FerreteriaProMAX01.Metodos
             PubsConn.Close();
             return r;
         }
+
+        public int ObtenerCompraT()
+        {
+            SqlConnection PubsConn = new SqlConnection(conn);
+            SqlCommand testCMD = new SqlCommand("ObtenerCompra", PubsConn);
+            PubsConn.Open();
+            testCMD.CommandType = CommandType.StoredProcedure;
+            var r = 0;
+            if (testCMD.ExecuteScalar() == null)
+            {
+                return r;
+            }
+            r = (int)testCMD.ExecuteScalar();
+            PubsConn.Close();
+            return r;
+        }
         public int BuscarEmpleadoU(int usuario)
         {
             SqlConnection PubsConn = new SqlConnection(conn);
@@ -217,6 +233,45 @@ namespace FerreteriaProMAX01.Metodos
                 return persona.ToList();
             }
 
+        }
+        public List<proveedores> Get5(String nombre)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection PubsConn = new SqlConnection(conn))
+            {
+                SqlCommand testCMD = new SqlCommand("BuscarProveedor", PubsConn);
+                PubsConn.Open();
+                testCMD.CommandType = CommandType.StoredProcedure;
+                testCMD.Parameters.AddWithValue("@nombre", nombre);
+                using (var da = new SqlDataAdapter(testCMD))
+                {
+                    da.Fill(dt);
+                }
+                var proveedor = from item in dt.AsEnumerable()
+                              select new proveedores
+                              {
+                                  Nombre = Convert.ToString(item["Nombre"]),
+                                  TipoProveedor = Convert.ToString(item["TipoProveedor"])
+                              };
+                return proveedor.ToList();
+            }
+
+        }
+        public int BuscarProv(string nombre)
+        {
+            SqlConnection PubsConn = new SqlConnection(conn);
+            SqlCommand testCMD = new SqlCommand("BuscarProveedorId", PubsConn);
+            PubsConn.Open();
+            testCMD.CommandType = CommandType.StoredProcedure;
+            testCMD.Parameters.AddWithValue("@nombre", nombre);
+            var r = 0;
+            if (testCMD.ExecuteScalar() == null)
+            {
+                return r;
+            }
+            r = (int)testCMD.ExecuteScalar();
+            PubsConn.Close();
+            return r;
         }
         //public int Get4(int idDetall, int idVenta)
         //{

@@ -143,6 +143,7 @@
     <Compile Include="Controllers\MarcasController.cs" />
     <Compile Include="Controllers\PersonasController.cs" />
     <Compile Include="Controllers\ProductoesController.cs" />
+    <Compile Include="Controllers\proveedoresController.cs" />
     <Compile Include="Controllers\TipoPagoesController.cs" />
     <Compile Include="Controllers\USUARIO_LOGINController.cs" />
     <Compile Include="Controllers\VentasController.cs" />
@@ -452,6 +453,11 @@
     <Content Include="Views\CompraProdProvs\Index.cshtml" />
     <Content Include="Views\CompraProdProvs\ObtenerProveedores.cshtml" />
     <Content Include="Views\CompraProdProvs\CompraN.cshtml" />
+    <Content Include="Views\proveedores\Create.cshtml" />
+    <Content Include="Views\proveedores\Delete.cshtml" />
+    <Content Include="Views\proveedores\Details.cshtml" />
+    <Content Include="Views\proveedores\Edit.cshtml" />
+    <Content Include="Views\proveedores\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

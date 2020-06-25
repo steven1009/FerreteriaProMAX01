@@ -1,12 +1,10 @@
-﻿using System;
+﻿using FerreteriaProMAX01.Models;
+using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using FerreteriaProMAX01.Models;
 
 namespace FerreteriaProMAX01.Controllers
 {
@@ -187,7 +185,7 @@ namespace FerreteriaProMAX01.Controllers
             Producto producto = new Producto();
             producto.IdProducto = p.IdProducto;
             producto.Nombre = p.Nombre;
-            producto.PrecioU =  p.PrecioU*100/140;
+            producto.PrecioU = p.PrecioU * 100 / 140;
             //db.Producto.Find(1);
             return Json(producto, JsonRequestBehavior.AllowGet);
         }

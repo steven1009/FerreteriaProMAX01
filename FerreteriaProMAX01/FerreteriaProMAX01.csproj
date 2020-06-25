@@ -137,6 +137,7 @@
     <Compile Include="Controllers\Empleadoes1Controller.cs" />
     <Compile Include="Controllers\EmpleadoesController.cs" />
     <Compile Include="Controllers\EstadoesController.cs" />
+    <Compile Include="Controllers\FacturasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IdDetalleProvProdsController.cs" />
     <Compile Include="Controllers\MarcasController.cs" />
@@ -449,6 +450,8 @@
     <Content Include="Views\CompraProdProvs\Details.cshtml" />
     <Content Include="Views\CompraProdProvs\Edit.cshtml" />
     <Content Include="Views\CompraProdProvs\Index.cshtml" />
+    <Content Include="Views\CompraProdProvs\ObtenerProveedores.cshtml" />
+    <Content Include="Views\CompraProdProvs\CompraN.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

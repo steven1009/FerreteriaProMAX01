@@ -128,5 +128,134 @@ namespace FerreteriaProMAX01.Controllers
             }
             base.Dispose(disposing);
         }
+        public ActionResult CompraN()
+        {
+            ViewBag.IdEmpleado = Session["idempleado"];
+            ViewBag.IdProductoL = new SelectList(db.Producto, "IdProducto", "Nombre");
+            return View();
+        }
+
+        // POST: Ventas/Create
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener
+        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CompraN([Bind(Include = "IdVenta,fecha,idPersona,idEmpleado")] Ventas ventas)
+        {
+
+            if (ModelState.IsValid)
+            {
+                db.Ventas.Add(ventas);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.IdEmpleado = Session["idempleado"];
+            ViewBag.IdProductoL = new SelectList(db.Producto, "IdProducto", "Nombre");
+            return View(ventas);
+        }
+
+        [HttpGet]
+        public ActionResult ObtenerProveedores()
+        {
+            return View(db.proveedores.ToList());
+        }
+
+        [HttpPost]//para buscar clientes
+        public ActionResult ObtenerProveedores(string txtnombre)
+        {
+            if (txtnombre == "")
+            {
+                txtnombre = "-1";
+            }
+
+            proveedores prov = new Models.proveedores();
+            prov.Nombre = txtnombre;
+
+
+            List<proveedores> proveedores = m.Get5(prov.Nombre);
+            return View(proveedores);
+
+
+        }
+
+        [HttpPost]
+        public ActionResult Seleccionar(string idProducto)
+        {
+            Producto p = db.Producto.Find(Int32.Parse(idProducto));
+
+            Producto producto = new Producto();
+            producto.IdProducto = p.IdProducto;
+            producto.Nombre = p.Nombre;
+            producto.PrecioU = p.PrecioU;
+            //db.Producto.Find(1);
+            return Json(producto, JsonRequestBehavior.AllowGet);
+        }
+        //public ActionResult PruebaJson()
+        //{  // escribir la url directa  para ver el formato
+        //    List<Producto> lista = objProductoNeg.findAll();
+        //    return Json(lista, JsonRequestBehavior.AllowGet);
+
+        //}
+        [HttpPost]
+        public ActionResult GuardarCompra(DateTime Fecha, string Nombre, string idEmpleado, string total1, List<IdDetalleProvProd> ListadoCompra)
+        {
+            string mensaje = "";
+            decimal iva = 0;
+            int idCompra = 0;
+            decimal total = 0;
+
+            if (idEmpleado == "")
+            {
+                if (idEmpleado == "") mensaje = "ERROR EN EL ID DEL CLIENTE";
+            }
+            else
+            {
+                CompraProdProv compra = db.CompraProdProv.Find(m.ObtenerVentaT());
+                if (compra == null)
+                {
+                    idCompra = 1;
+                }
+                else
+                {
+                    idCompra = (int)compra.IdCompraProdProv + 1;
+                }
+                //codigoPago = Convert.ToInt32(modoPago);
+                proveedores proveedores = db.proveedores.Find(m.BuscarProv(Nombre));
+                
+
+                //REGISTRO DE VENTA
+                CompraProdProv compra1 = new CompraProdProv();
+                compra1.Fecha = Fecha;
+                compra1.IdProveedores = proveedores.IdProveedores;
+                db.CompraProdProv.Add(compra1);
+                db.SaveChanges();
+                decimal tdescuento = (decimal) 0;
+                int indexv = m.ObtenerCompraT();
+                foreach (var data in ListadoCompra)
+                {
+                    int cantidad = Convert.ToInt32(data.Cantidad.ToString());
+                    decimal descuento = Convert.ToDecimal(data.Descuento.ToString());
+                    tdescuento = tdescuento + descuento;
+                    decimal subtotal = Convert.ToDecimal(data.SubTOTAL.ToString());
+                    iva = subtotal * (decimal)0.15;
+                    total = subtotal - descuento + iva;
+                    IdDetalleProvProd compradetalle = new IdDetalleProvProd();
+                    compradetalle.IdVenta = indexv;
+                    compradetalle.IdProducto = idProducto;
+                    compradetalle.Cantidad = cantidad;
+                    compradetalle.SubTOTAL = subtotal;
+                    compradetalle.Descuento = descuento;
+                    compradetalle.Iva = iva;
+                    compradetalle.Total = total;
+                    db.IdDetalleProvProd.Add(compradetalle);
+                    db.SaveChanges();
+
+
+                }
+                mensaje = "VENTA GUARDADA CON EXITO...";
+            }
+            return Json(mensaje);
+
+        }
     }
 }

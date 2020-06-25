@@ -169,6 +169,12 @@ namespace FerreteriaProMAX01
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "CompraProdProvs", action = "ObtenerProveedores", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+            name: "Salir",
+            url: "{controller}/{action}/{id}",
+            defaults: new { controller = "Usuario_Login", action = "LogOff", id = UrlParameter.Optional }
+            );
+
         }
     }
 }

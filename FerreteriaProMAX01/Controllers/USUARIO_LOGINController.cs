@@ -217,6 +217,14 @@ namespace FerreteriaProMAX01.Controllers
 
 
         }
+        public ActionResult LogOff()
+        {
+            Session["id"] = 0;
+            Session["idempleado"] = 0;
+            Session["Idroles"] = 0;
+            return RedirectToAction("Login", "Usuario_Login");
+
+        }
 
         protected override void Dispose(bool disposing)
         {

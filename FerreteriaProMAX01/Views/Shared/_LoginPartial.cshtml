@@ -21,7 +21,8 @@ else if (!Session["id"].ToString().Equals("0"))
                 <ul class="nav navbar-nav navbar-right">
                     <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
                     <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                    <li style="margin-right:10px">@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                    <li style="margin-right:10px">@Html.ActionLink("Salir", "LogOff", "Usuario_Login")</li>
                 </ul>
             </div>
         </nav>

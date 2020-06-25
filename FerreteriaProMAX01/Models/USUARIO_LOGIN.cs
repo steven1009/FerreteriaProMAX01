@@ -11,7 +11,8 @@ namespace FerreteriaProMAX01.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class USUARIO_LOGIN
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,6 +24,7 @@ namespace FerreteriaProMAX01.Models
     
         public int IdUsuario { get; set; }
         public string Usuario { get; set; }
+        [StringLength(10, ErrorMessage = "El titulo no debe ser mayor a 10 caracteres")]
         public string Contraseña { get; set; }
         public Nullable<int> idPersona { get; set; }
     

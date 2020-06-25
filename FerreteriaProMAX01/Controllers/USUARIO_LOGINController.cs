@@ -209,6 +209,7 @@ namespace FerreteriaProMAX01.Controllers
                 case true:
                     return RedirectToAction("Index", "Home");
                 case false:
+                    ModelState.AddModelError("", "Intento de inicio de sesión no válido.");
                     return View("Login", "USUARIO_LOGIN");
                 default:
                     return View();

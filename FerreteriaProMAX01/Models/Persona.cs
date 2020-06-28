@@ -33,6 +33,9 @@ namespace FerreteriaProMAX01.Models
         public string Primer_Apellido { get; set; }
         public string Segund_Apellido { get; set; }
         public Nullable<System.DateTime> Fecha_nacimiento { get; set; }
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Solo se permiten números")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El número es obligatorio")]
+        [StringLength(12, ErrorMessage = "El número es demasiado largo")]
         public string Telefono { get; set; }
         [StringLength(8, ErrorMessage = "El titulo no debe ser mayor a 10 caracteres")]
         public string Correo { get; set; }

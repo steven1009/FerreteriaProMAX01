@@ -9,7 +9,10 @@ namespace FerreteriaProMAX01.Metodos
 {
     public class Metodos
     {
+        //private string conn = "Server=.;Database=FERRETERIADB;User ID=WINDOWS\\mdelgadillo;Integrated Security=True;";
+        //private string conn = "Data Source=sql5053.site4now.net;Initial Catalog=DB_A63B48_FerreteriaDB;Persist Security Info=True;User ID=DB_A63B48_FerreteriaDB_admin;password=bde92a58;";
         private string conn = "Data Source=.;integrated Security=sspi;initial catalog=FERRETERIADB;";
+
         public int USUARIO_LOGINL(String usuario, String contraseña)
         {
             SqlConnection PubsConn = new SqlConnection(conn);

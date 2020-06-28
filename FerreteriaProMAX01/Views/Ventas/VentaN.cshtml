@@ -2,12 +2,8 @@
 @{
     ViewBag.Title = "VentaN";
 }
-
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
-<script src="~/Scripts/Js/alertify.min.js"></script>
-<link href="~/Content/Css/alertify.core.css" rel="stylesheet" />
-<link href="~/Content/Css/alertify.default.css" rel="stylesheet" />
-@*<meta http-equiv="refresh" content="6">*@
+@Styles.Render("~/Content/css")
+@Styles.Render("~/bundles/bootstrap")
 
 
 <script type="text/javascript">
@@ -67,24 +63,24 @@
 
     });
     //variables
-    var total=0;
-    var valor=0;
-    var subtotal=0;
+    var total = 0;
+    var valor = 0;
+    var subtotal = 0;
     function obtenerCliente(Cliente) {
         //var watchclose = setInterval(function () {
-            $("#txtnombre").val(Cliente.DatosPersonales);
-            $("#idCliente").val(Cliente.Identificacion);
-            $("#codigoCliente").val(Cliente.Codigo);
+        $("#txtnombre").val(Cliente.DatosPersonales);
+        $("#idCliente").val(Cliente.Identificacion);
+        $("#codigoCliente").val(Cliente.Codigo);
 
         //});
     }
 
     function fn_agregar() {
 
-        cadena="<tr>"
-        cadena=cadena+"<td>"+$("#idproducto").val()+"</td>";
-        cadena=cadena+"<td>"+$("#nombreproducto").val()+"</td>";
-        cadena=cadena+"<td>"+$("#cantidad").val()+"</td>";
+        cadena = "<tr>"
+        cadena = cadena + "<td>" + $("#idproducto").val() + "</td>";
+        cadena = cadena + "<td>" + $("#nombreproducto").val() + "</td>";
+        cadena = cadena + "<td>" + $("#cantidad").val() + "</td>";
         cadena = cadena + "<td>" + $("#precio").val() + "</td>";
         cadena = cadena + "<td>" + $("#descuento").val() + "</td>";
 
@@ -94,9 +90,9 @@
         y = $("#cantidad").val();
         x = $("#precio").val();
         des = $("#descuento").val();
-        subtotal=(x*y)-des;
+        subtotal = (x * y) - des;
         cadena = cadena + "<td>" + subtotal + "</td>"
-        cadena=cadena+"<td><a class ='elimina'><button class='btn btn-danger' type='button'><span class='fa fa-remove'></span></button></a></td>";
+        cadena = cadena + "<td><a class ='elimina'><button class='btn btn-danger' type='button'><span class='fa fa-remove'></span></button></a></td>";
         $("#detalle tbody").append(cadena);
         sumar();
         fn_dar_eliminar();
@@ -119,20 +115,20 @@
         $("#detalle tbody tr").val("");
     }
     function sumar() {
-        total=total+subtotal;
+        total = total + subtotal;
         console.info(total);
         $("#TotalaPagar").val(total);
 
     }
     function restar() {
-        total=total-valor;
+        total = total - valor;
         $("#TotalaPagar").val(total);
     }
-    function fn_dar_eliminar(){
+    function fn_dar_eliminar() {
         $("a.elimina").click(function () {
             valor = $(this).parents("tr").find("td").eq(5).html();
 
-            $(this).parents("tr").fadeOut("normal",function(){
+            $(this).parents("tr").fadeOut("normal", function () {
                 $(this).remove();
                 restar();
             });
@@ -142,9 +138,9 @@
 
 </script>
 
-<a style="float:right;" class="btn btn-success" href="~/Venta/VentaFactura" target="_blank">Mas Facturas</a>
+@*<a style="float:right;" class="btn btn-success" href="~/Venta/VentaFactura" target="_blank">Mas Facturas</a>
 
-<a style="float:right;" class="btn btn-success" href="~/Venta/reporteActual" target="_blank">Imprimir Factura</a>
+    <a style="float:right;" class="btn btn-success" href="~/Venta/reporteActual" target="_blank">Imprimir Factura</a>*@
 
 <table id="encabezado" class="table">
     <thead>
@@ -169,15 +165,17 @@
             <td>
                 Modo de Pago
                 <div class="col-md-12 dropdown">
-                    @Html.DropDownList("idPago", null, "Seleccione Modo Pago", htmlAttributes: new { @class = "form-control", @required = "required"})
+                    @Html.DropDownList("idPago", null, "Seleccione Modo Pago", htmlAttributes: new { @class = "form-control", @required = "required" })
                     @*@Html.DropDownList("modoPago", ViewBag.ListaModoPago as SelectList, "Seleccione Modo Pago", htmlAttributes: new { @class = "form-control", @required = "required" })*@
                 </div>
             </td>
         </tr>
         <tr style="font-size:20px;">
 
-            <td>Nombre Cliente
-            <input style="font-size:20px; font-weight:700;" class="form-control" type="text" id="txtnombre" readonly required /></td>
+            <td>
+                Nombre Cliente
+                <input style="font-size:20px; font-weight:700;" class="form-control" type="text" id="txtnombre" readonly required />
+            </td>
             <td>
                 DNI
                 <input type="hidden" id="codigoCliente">
@@ -281,4 +279,5 @@
     });
 
 </script>
+
 

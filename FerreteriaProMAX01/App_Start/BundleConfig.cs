@@ -8,7 +8,14 @@ namespace FerreteriaProMAX01
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                "~/Scripts/morris/morris.min.js",
+                "~/Content/menu/metisMenu.min.js",
+                   "~/scripts/js/sb-admin-2.min.js" ,
+                    "~/scripts/jquey/jquery-3.4.1.min.js" ,
+                        "~/Scripts/modernizr-2.8.3.min.js",
+                         "~/scripts/jquey/jquery.validate.min.js",
+                          "~/scripts/jquey/jquery.validate.unobtrusive.js",
+                    "~/Scripts/jquery-3.4.1.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -22,8 +29,13 @@ namespace FerreteriaProMAX01
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                "~/Content/nuevos/sb-admin-2.min.css",
+                "~/Content/nuevos/sb-admin-2.css",
+               "~/Content/menu/metisMenu.min.css",
+                 "~/Content/font-awesome/css/font-awesome.min.css",
+                 "~/Content/bootstrap.css",
+                "~/Content/site.css"));
         }
     }
 }
+
